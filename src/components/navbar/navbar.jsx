@@ -1,37 +1,40 @@
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import './styles.css';
+import LanguageSwitcher from "../LanguageSwitcher/languageSwitcher";
+import { useTranslation } from "react-i18next";
+import "./styles.css";
 
 function Navbar() {
-	const navRef = useRef();
+  const { t } = useTranslation("navbar");
 
-	const showNavbar = () => {
-		navRef.current.classList.toggle(
-			"responsive_nav"
-		);
-	};
+  const navRef = useRef();
 
-	return (
-		<header className="nav">
-			<h3>LOGO</h3>
-			<nav ref={navRef}>
-				<a href="/#">Начало</a>
-				<a href="/#">За нас</a>
-				<a href="/list">Списание</a>
-				<a href="/#">Остави мнение</a>
-				<button
-					className="nav-btn nav-close-btn"
-					onClick={showNavbar}>
-					<FaTimes />
-				</button>
-			</nav>
-			<button
-				className="nav-btn"
-				onClick={showNavbar}>
-				<FaBars />
-			</button>
-		</header>
-	);
+  const showNavbar = () => {
+    navRef.current.classList.toggle("responsive_nav");
+  };
+
+  return (
+    <header className="nav">
+      <div className="start">
+        <h3>LOGO</h3>
+        <LanguageSwitcher />
+      </div>
+      <div className="end">
+        <nav ref={navRef}>
+          <a href="/#">{t("home_page")}</a>
+          <a href="/#">{t("authors_page")}</a>
+          <a href="/#">{t("journal_page")}</a>
+          <a href="/list">{t("archive_page")}</a>
+          <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+            <FaTimes />
+          </button>
+        </nav>
+        <button className="nav-btn" onClick={showNavbar}>
+          <FaBars />
+        </button>
+      </div>
+    </header>
+  );
 }
 
 export default Navbar;
