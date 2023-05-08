@@ -7,14 +7,20 @@ function SearchBar({ formSubmit, value, handleSearchKey, clearSearch }) {
   return (
     <div className="searchBar-wrap">
       <form className="searchBar-form" onSubmit={formSubmit}>
-        <input
-          type="text"
-          placeholder={t("search_key_word")}
-          value={value}
-          onChange={handleSearchKey}
-        />
-        {value && <span onClick={clearSearch}>X</span>}
-        <button>{t("search_button")} 🔎</button>
+        <div className="searchBar-input-wrap">
+          <input
+            type="text"
+            placeholder={t("search_key_word")}
+            value={value}
+            onChange={handleSearchKey}
+          />
+          {value && (
+            <button className="clear-button" onClick={clearSearch}>
+              X
+            </button>
+          )}
+        </div>
+        <button><i className="material-icons">search</i></button>
       </form>
     </div>
   );
