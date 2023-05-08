@@ -3,8 +3,9 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Blog from "./pages/Blog";
 import Home from "./pages/Home";
-import Register from "./pages/Register/register";
 import LoginPage from "./pages/Login/login";
+import Register from "./pages/Register/register";
+import ForgotPasswordPage from "./pages/ForgotPassword/forgotPasswordPage";
 import MagazineList from "./pages/Magazine/magazine_list";
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/blog/:id" element={<Blog />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>

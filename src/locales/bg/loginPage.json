@@ -3,6 +3,7 @@
   "login_email": "Email",
   "login_password": "Парола",
   "login_submit": "Вход",
+  "login_forgot_password": "Забравена парола?",
   "login_no_account": "Все още нямаш акаунт?",
   "login_no_account_register": "Регистрирай се",
 
@@ -18,5 +19,11 @@
   "register_isAdmin": "Администратор",
   "register_submit": "Регистрирай се",
   "already_registered": "Вече имаш акаунт?",
-  "already_registered_login": "Влез"
+  "already_registered_login": "Влез",
+
+  "forgot_password_title": "Забравена парола",
+  "forgot_password_email": "Email",
+  "forgot_password_submit": "Промени паролата",
+  "forgot_password_success": "Изпратихме имейл с информация за промяна на паролата."
+
 }

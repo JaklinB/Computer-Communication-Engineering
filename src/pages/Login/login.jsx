@@ -58,9 +58,13 @@ const LoginPage = () => {
             value={password}
             onChange={handlePasswordChange}
           />
+          <Link to="/forgot-password" style={{ fontWeight: "600", color: "#a9a9a9", "text-decoration": "none", "textAlign": "end", "font-size": "12px" }}>
+            {t("login_forgot_password")}
+          </Link>
           <br />
           <button type="submit">{t("login_submit")}</button>
         </form>
+        <br />
         <p>
           {t("login_no_account")}{" "}
           <Link to="/register" style={{ "font-weight": "bold" }}>

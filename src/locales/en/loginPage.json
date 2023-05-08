@@ -3,6 +3,7 @@
   "login_email": "Email",
   "login_password": "Password",
   "login_submit": "Log in",
+  "login_forgot_password": "Forgot password?",
   "login_no_account": "Don't have an account yet?",
   "login_no_account_register": "Register now",
 
@@ -18,5 +19,11 @@
   "register_isAdmin": "Admin",
   "register_submit": "Register",
   "already_registered": "Already have an account?",
-  "already_registered_login": "Log in"
+  "already_registered_login": "Log in",
+
+  "forgot_password_title": "Forgot your password?",
+  "forgot_password_email": "Email",
+  "forgot_password_submit": "Reset password",
+  "forgot_password_success": "We have sent an email with password change information."
+
 }
