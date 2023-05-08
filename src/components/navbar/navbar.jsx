@@ -26,6 +26,7 @@ function Navbar() {
           <a href="/#">{t("journal_page")}</a>
           <a href="/list">{t("archive_page")}</a>
           <a href="/register">Register</a>
+          <a href="/login">LoginPage</a>
           <button className="nav-btn nav-close-btn" onClick={showNavbar}>
             <FaTimes />
           </button>

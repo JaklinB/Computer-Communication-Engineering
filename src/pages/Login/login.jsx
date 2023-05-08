@@ -1,25 +1,65 @@
 import React, { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import "./styles.css";
 
-export const Login = (props) => {
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
+const LoginPage = () => {
+  const auth = getAuth();
+  const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(email);
-    }
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-    return (
-        <div className="auth-form-container">
-            <h2>Login</h2>
-            <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlFor="email">email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" />
-                <label htmlFor="password">password</label>
-                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                <button type="submit">Log In</button>
-            </form>
-            <button className="link-btn" onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</button>
-        </div>
-    )
-}
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("User is authenticated", user);
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Authentication failed", errorMessage);
+        setErrorMessage(errorMessage);
+      });
+  };
+
+  return (
+    <div>
+      <h1>Register</h1>
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+          {errorMessage && <p>{errorMessage}</p>}
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <br />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <br />
+          <button type="submit">Log in</button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;
