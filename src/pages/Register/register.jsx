@@ -15,9 +15,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [photoUrl, setPhotoUrl] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
-  const [storage, setStorage] = useState(firebase.storage()); // Initialize Firebase Storage
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -32,7 +30,6 @@ const Register = () => {
           firstName,
           lastName,
           role,
-          photoUrl,
           isAdmin,
         });
       })
