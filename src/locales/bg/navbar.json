@@ -3,5 +3,6 @@
   "authors_page": "За авторите",
   "journal_page": "За списанието",
   "archive_page": "Архив",
-  "login_page":"Вход"
+  "login_page":"Вход",
+  "logout": "Изход"
 }

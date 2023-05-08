@@ -3,5 +3,6 @@
   "authors_page": "Authors",
   "journal_page": "Journal",
   "archive_page": "Archive",
-  "login_page":"Log in"
+  "login_page":"Log in",
+  "logout": "Log out"
 }
