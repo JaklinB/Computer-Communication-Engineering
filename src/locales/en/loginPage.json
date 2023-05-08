@@ -1,0 +1,22 @@
+{
+  "login_title": "Log in",
+  "login_email": "Email",
+  "login_password": "Password",
+  "login_submit": "Log in",
+  "login_no_account": "Don't have an account yet?",
+  "login_no_account_register": "Register now",
+
+  "register_title": "Registration",
+  "register_first_name": "First Name",
+  "register_last_name": "Last Name",
+  "register_email": "Email",
+  "register_password": "Password",
+  "register_role": "Select role",
+  "register_role_student": "Student",
+  "register_role_teacher": "Teacher",
+  "register_role_other": "Other",
+  "register_isAdmin": "Admin",
+  "register_submit": "Register",
+  "already_registered": "Already have an account?",
+  "already_registered_login": "Log in"
+}

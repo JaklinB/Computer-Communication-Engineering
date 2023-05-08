@@ -62,3 +62,21 @@ button:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.57);
 }
+
+p {
+  margin: 10px 0;
+  font-size: 16px;
+  display: grid;
+  text-align: start;
+}
+
+p a {
+  color: #5767aa;
+  text-decoration: none;
+}
+
+p a:hover {
+  color: #29335c;
+  cursor: pointer;
+  text-decoration: underline;
+}

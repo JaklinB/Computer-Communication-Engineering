@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./styles.css";
 
 const LoginPage = () => {
+  const { t } = useTranslation("loginPage");
+
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -37,26 +41,32 @@ const LoginPage = () => {
 
   return (
     <div>
-      <h1>Register</h1>
+      <h1>{t("login_title")}</h1>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           {errorMessage && <p>{errorMessage}</p>}
           <input
             type="email"
-            placeholder="Email"
+            placeholder={t("login_email")}
             value={email}
             onChange={handleEmailChange}
           />
           <br />
           <input
             type="password"
-            placeholder="Password"
+            placeholder={t("login_password")}
             value={password}
             onChange={handlePasswordChange}
           />
           <br />
-          <button type="submit">Log in</button>
+          <button type="submit">{t("login_submit")}</button>
         </form>
+        <p>
+          {t("login_no_account")}{" "}
+          <Link to="/register" style={{ "font-weight": "bold" }}>
+            {t("login_no_account_register")}
+          </Link>
+        </p>
       </div>
     </div>
   );

@@ -4,12 +4,16 @@ import "firebase/compat/firestore";
 import "firebase/compat/storage";
 import firebase from "firebase/compat/app";
 import firebaseConfig from "../../config/firebaseConfig";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./styles.css";
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 const Register = () => {
+  const { t } = useTranslation("loginPage");
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,49 +45,55 @@ const Register = () => {
 
   return (
     <div>
-      <h1>Register</h1>
+      <h1>{t("register_title")}</h1>
       <div className="form-container">
         <form onSubmit={handleRegister}>
           <input
             type="text"
-            placeholder="First Name"
+            placeholder={t("register_first_name")}
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
           <input
             type="text"
-            placeholder="Last Name"
+            placeholder={t("register_last_name")}
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
           <input
             type="email"
-            placeholder="Email"
+            placeholder={t("register_email")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder={t("register_password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="">--Select Role--</option>
-            <option value="student">Student</option>
-            <option value="teacher">Teacher</option>
-            <option value="fan">Fan</option>
+            <option value="">{t("register_role")}</option>
+            <option value="student">{t("register_role_student")}</option>
+            <option value="teacher">{t("register_role_teacher")}</option>
+            <option value="fan">{t("register_role_other")}</option>
           </select>
           <label>
-            Admin:
+            {t("register_isAdmin")}
             <input
               type="checkbox"
               checked={isAdmin}
               onChange={(e) => setIsAdmin(e.target.checked)}
             />
           </label>
-          <button type="submit">Register</button>
+          <button type="submit">{t("register_submit")}</button>
         </form>{" "}
+        <p>
+          {t("already_registered")}{" "}
+          <Link to="/login" style={{ "font-weight": "bold" }}>
+            {t("already_registered_login")}
+          </Link>
+        </p>
       </div>
     </div>
   );
