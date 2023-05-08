@@ -49,7 +49,7 @@ function Navbar() {
       <div className="end">
         <nav ref={navRef}>
           <a href="/#">{t("home_page")}</a>
-          <a href="/#">{t("authors_page")}</a>
+          <a href="/authors">{t("authors_page")}</a>
           <a href="/#">{t("journal_page")}</a>
           <a href="/list">{t("archive_page")}</a>
           {isLoggedIn ? (

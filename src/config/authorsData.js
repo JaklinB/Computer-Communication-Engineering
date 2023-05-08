@@ -1,0 +1,55 @@
+export const authorsData = [
+  {
+    category: "Honorary Editor-in-Chief",
+    authors: [
+      { name: "Ognian Nakov", nationality: "Bulgaria" },
+      { name: "Dimitar Dimitrov", nationality: "Bulgaria" },
+    ],
+  },
+  {
+    category: "Editor-in-Chief",
+    authors: [
+      {
+        name: "Milena Lazarova",
+        nationality: "Bulgaria",
+      },
+      {
+        name: "Veska Georgieva",
+        nationality: "Bulgaria",
+      },
+    ],
+  },
+  {
+    category: "Editorial and Scientific Board",
+    authors: [
+      { name: "Adelina Aleksieva-Petrova", nationality: "Bulgaria" },
+      { name: "Antoniya Tasheva", nationality: "Bulgaria" },
+      { name: "Boyan Bonchev", nationality: "Bulgaria" },
+      { name: "Boyanka Nikolova", nationality: "Bulgaria" },
+      { name: "Hristo Hristov", nationality: "Bulgaria" },
+      { name: "Ivo Draganov", nationality: "Bulgaria" },
+      { name: "Kamen Filyov", nationality: "Bulgaria" },
+      { name: "Lidiya Yordanova", nationality: "Bulgaria" },
+      { name: "Marin Hristov", nationality: "Bulgaria" },
+      { name: "Milen Petrov", nationality: "Bulgaria" },
+      { name: "Nina Sinyagina", nationality: "Bulgaria" },
+      { name: "Petar Antonov", nationality: "Bulgaria" },
+      { name: "Rumen Arnaudov", nationality: "Bulgaria" },
+      { name: "Stoyan Bonev", nationality: "Bulgaria" },
+      { name: "Veska Gancheva", nationality: "Bulgaria" },
+      { name: "Vladimir Pulkov", nationality: "Bulgaria" },
+      { name: "Zlatka Valkova-Jarvis", nationality: "Bulgaria" },
+      { name: "Anna Friesel", nationality: "Denmark" },
+      { name: "Baki Koyuncu", nationality: "Turkey" },
+      { name: "Barna Iantovics", nationality: "Romania" },
+      { name: "Betim Cico", nationality: "Albania" },
+      { name: "Georg Paul", nationality: "Germany" },
+      { name: "Hubert Roth", nationality: "Germany" },
+      { name: "Miglena Dontschewa", nationality: "Austria" },
+      { name: "Nuno Escudeiro", nationality: "Portugal" },
+      { name: "Sofoklis Christoforidis", nationality: "Greece" },
+      { name: "Tunga Gungor", nationality: "Turkey" },
+      { name: "Vassilios Chatzis", nationality: "Greece" },
+    ],
+  },
+];
