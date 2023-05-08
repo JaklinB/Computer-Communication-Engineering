@@ -63,9 +63,9 @@ const LoginPage = () => {
             style={{
               fontWeight: "600",
               color: "#a9a9a9",
-              "text-decoration": "none",
+              textDecoration: "none",
               textAlign: "end",
-              "font-size": "12px",
+              fontSize: "12px",
             }}
           >
             {t("login_forgot_password")}
@@ -76,7 +76,7 @@ const LoginPage = () => {
         <br />
         <p>
           {t("login_no_account")}{" "}
-          <Link to="/register" style={{ "font-weight": "bold" }}>
+          <Link to="/register" style={{ fontWeight: "bold" }}>
             {t("login_no_account_register")}
           </Link>
         </p>

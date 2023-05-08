@@ -90,7 +90,7 @@ const Register = () => {
         </form>{" "}
         <p>
           {t("already_registered")}{" "}
-          <Link to="/login" style={{ "font-weight": "bold" }}>
+          <Link to="/login" style={{ fontWeight: "bold" }}>
             {t("already_registered_login")}
           </Link>
         </p>
