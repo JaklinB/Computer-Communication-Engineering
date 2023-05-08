@@ -1,0 +1,13 @@
+{
+    "submit_paper_title": "Submit Your Paper",
+    "submit_paper_publication_fee": "Publication fee",
+    "submit_paper_publication_fee_rest": "can be paid either via bank transfer or at the cash office of the Scientific research sector of the Technical University of Sofia.",
+    "submit_paper_submissions": "Submissions must comply with the ",
+    "submit_paper_formatting":"formatting guidelines.",
+
+    "submit_paper_form_name": "Name:",
+    "submit_paper_form_email": "Email:",
+    "submit_paper_form_file": "File:",
+    "submit_paper_submit": "Submit"
+
+}

@@ -52,6 +52,7 @@ function Navbar() {
           <a href="/authors">{t("authors_page")}</a>
           <a href="/#">{t("journal_page")}</a>
           <a href="/list">{t("archive_page")}</a>
+          <a href="/submit-paper">Submit Paper</a>
           {isLoggedIn ? (
             <button className="logout-btn" onClick={handleLogout}>
               {t("logout")}

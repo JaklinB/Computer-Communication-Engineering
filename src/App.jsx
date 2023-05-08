@@ -8,6 +8,7 @@ import Register from "./pages/Register/register";
 import ForgotPasswordPage from "./pages/ForgotPassword/forgotPasswordPage";
 import AuthorsPage from "./pages/Authors/authors";
 import MagazineList from "./pages/Magazine/magazine_list";
+import SubmitPaper from "./pages/SubmitPaper/submit_paper";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/authors" element={<AuthorsPage />} />
+        <Route path="/submit-paper" element={<SubmitPaper />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>

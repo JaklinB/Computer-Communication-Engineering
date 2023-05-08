@@ -1,0 +1,13 @@
+{
+    "submit_paper_title": "Изпратете своята работа",
+    "submit_paper_publication_fee": "Таксата за публикация",
+    "submit_paper_publication_fee_rest": "може да се заплати по банков път или в касата на сектор \"Научни изследвания\" на ТУ-София.",
+    "submit_paper_submissions": "Изпратените материали трябва да отговарят на ",
+    "submit_paper_formatting":"указанията за форматиране.",
+
+    "submit_paper_form_name": "Име:",
+    "submit_paper_form_email": "Email:",
+    "submit_paper_form_file": "Файл:",
+    "submit_paper_submit": "Изпрати"
+
+}
