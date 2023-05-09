@@ -1,13 +1,47 @@
 {
-    "submit_paper_title": "Изпратете своята работа",
-    "submit_paper_publication_fee": "Таксата за публикация",
-    "submit_paper_publication_fee_rest": "може да се заплати по банков път или в касата на сектор \"Научни изследвания\" на ТУ-София.",
-    "submit_paper_submissions": "Изпратените материали трябва да отговарят на ",
-    "submit_paper_formatting":"указанията за форматиране.",
+  "submit_paper_title": "Изпратете своята работа",
+  "submit_paper_publication_fee": "Таксата за публикация",
+  "submit_paper_publication_fee_rest": "може да се заплати по банков път или в касата на сектор \"Научни изследвания\" на ТУ-София.",
+  "submit_paper_submissions": "Изпратените материали трябва да отговарят на ",
+  "submit_paper_formatting": "указанията за форматиране.",
 
-    "submit_paper_form_name": "Име:",
-    "submit_paper_form_email": "Email:",
-    "submit_paper_form_file": "Файл:",
-    "submit_paper_submit": "Изпрати"
+  "submit_paper_form_name": "Име:",
+  "submit_paper_form_email": "Email:",
+  "submit_paper_form_file": "Файл:",
+  "submit_paper_submit": "Изпрати",
 
+  "publication_fee_label":"Такса за публикация",
+  "publication_fee_year_label":"Годишен абонамент",
+  "including_postage":"Включително пощенски разходи",
+  "recommended":"Препоръчвано",
+
+  "publication_fees_label":"Такси за публикация",
+
+  "tu_sofia": "Tехнически университет - София",
+  "invoice_details": "Данни за фактура:",
+  "address": "София 1797, бул. “Кл. Охридски” 8, бл. 1, ет. 3",
+
+  "bank_transfer_label": "Банков превод",
+  "bank_transfer_info": "\"ТУ – София\"– НИС",
+
+  "UIC_label": "ЕИК",
+  "UIC_info": "83 191 783 400 12",
+
+  "VAT_label": "ИН по ДДС",
+  "VAT_info": "BG 83 191 7834",
+
+  "accountable_person_label": "МОЛ",
+  "accountable_person_info": "Иван Кралов",
+
+  "IBAN_label": "IBAN",
+  "IBAN_info": "BG24 BNBG 9661 3100 1038 01",
+
+  "BIC_label": "BIC Код на БНБ – София",
+  "BIC_info": "BNBGBGSD",
+
+  "contract_num_label": "Договор №",
+  "contract_num_info": "6380",
+
+  "payment_label_info":"За да бъде публикувана вашата статия, трябва да заплатите такса за публикуване.",
+  "payment_info": "Плащането може да се извърши по банков път или в касата на сектор \"Научни изследвания\" на ТУ-София."
 }

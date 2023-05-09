@@ -29,7 +29,7 @@ function SubmitPaper() {
     <div>
       <h1>{t("submit_paper_title")}</h1>
       <p>
-        {t("submit_paper_publication_fee")}{" "}
+        <a href="/publication-fee">{t("submit_paper_publication_fee")}</a>{" "}
         {t("submit_paper_publication_fee_rest")}
       </p>
       <p>

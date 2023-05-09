@@ -1,13 +1,47 @@
 {
-    "submit_paper_title": "Submit Your Paper",
-    "submit_paper_publication_fee": "Publication fee",
-    "submit_paper_publication_fee_rest": "can be paid either via bank transfer or at the cash office of the Scientific research sector of the Technical University of Sofia.",
-    "submit_paper_submissions": "Submissions must comply with the ",
-    "submit_paper_formatting":"formatting guidelines.",
+  "submit_paper_title": "Submit Your Paper",
+  "submit_paper_publication_fee": "Publication fee",
+  "submit_paper_publication_fee_rest": "can be paid either via bank transfer or at the cash office of the Scientific research sector of the Technical University of Sofia.",
+  "submit_paper_submissions": "Submissions must comply with the ",
+  "submit_paper_formatting": "formatting guidelines.",
 
-    "submit_paper_form_name": "Name:",
-    "submit_paper_form_email": "Email:",
-    "submit_paper_form_file": "File:",
-    "submit_paper_submit": "Submit"
+  "submit_paper_form_name": "Name:",
+  "submit_paper_form_email": "Email:",
+  "submit_paper_form_file": "File:",
+  "submit_paper_submit": "Submit",
 
+  "publication_fee_label":"Publication Fee",
+  "publication_fee_year_label":"Annual subscription",
+  "including_postage":"Including postage",
+  "recommended":"Recommended",
+
+  "publication_fees_label":"Publication Fees",
+
+  "tu_sofia": "Technical University of Sofia",
+  "invoice_details": "Invoice details:",
+  "address": "Sofia 1797, Blvd. \"Kl. Ohridski\" 8, bl. 1, fl. 3",
+
+  "bank_transfer_label": "Bank transfer",
+  "bank_transfer_info": "\"ТУ – София\"– НИС",
+
+  "UIC_label": "UIC",
+  "UIC_info": "83 191 783 400 12",
+
+  "VAT_label": "VAT",
+  "VAT_info": "BG 83 191 7834",
+
+  "accountable_person_label": "Accountable person",
+  "accountable_person_info": "Ivan Kralov",
+
+  "IBAN_label": "IBAN",
+  "IBAN_info": "BG24 BNBG 9661 3100 1038 01",
+
+  "BIC_label": "BIC",
+  "BIC_info": "BNBGBGSD",
+
+  "contract_num_label": "Contract №",
+  "contract_num_info": "6380",
+
+  "payment_label_info":"To have your paper published, you need to pay publication fee.",
+  "payment_info": "Payment can be made via bank transfer or at the cash office of the Scientific research sector of the Technical University of Sofia."
 }

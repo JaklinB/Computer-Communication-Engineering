@@ -9,6 +9,7 @@ import ForgotPasswordPage from "./pages/ForgotPassword/forgotPasswordPage";
 import AuthorsPage from "./pages/Authors/authors";
 import MagazineList from "./pages/Magazine/magazine_list";
 import SubmitPaper from "./pages/SubmitPaper/submit_paper";
+import PublicationFees from "./pages/PublicationFees/publication_fees";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/authors" element={<AuthorsPage />} />
         <Route path="/submit-paper" element={<SubmitPaper />} />
+        <Route path="/publication-fee" element={<PublicationFees />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
