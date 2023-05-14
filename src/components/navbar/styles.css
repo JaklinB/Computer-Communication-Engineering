@@ -20,6 +20,14 @@
   align-items: center;
 }
 
+.logo-img {
+  height: 60px;
+}
+
+.nav-logo {
+  mask-image: linear-gradient(to left, transparent 1%, black);
+  height: 100%;
+}
 
 header {
   display: flex;
@@ -41,7 +49,7 @@ nav a:hover {
   color: var(--secondaryColor);
 }
 
-.logout-btn{
+.logout-btn {
   margin-left: 1rem;
   padding: 0.5rem 1rem;
   border: none;
@@ -53,7 +61,7 @@ nav a:hover {
   transition: all 0.3s ease-in-out;
 }
 
-.logout-btn:hover{
+.logout-btn:hover {
   color: #29335c;
   background-color: rgba(255, 255, 255, 0.4);
   transform: scale(1.03);
@@ -76,6 +84,7 @@ header div,
 nav {
   display: flex;
   align-items: center;
+  text-align: center;
 }
 
 @media only screen and (max-width: 1024px) {

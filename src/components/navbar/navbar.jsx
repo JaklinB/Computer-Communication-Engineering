@@ -43,7 +43,13 @@ function Navbar() {
   return (
     <header className="nav">
       <div className="start">
-        <h3>LOGO</h3>
+        <div className="logo-img">
+          <img
+            className="nav-logo"
+            src="/assets/images/logo-magazine.jpg"
+            alt="LOGO"
+          />
+        </div>
         <LanguageSwitcher />
       </div>
       <div className="end">

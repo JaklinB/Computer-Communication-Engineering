@@ -162,7 +162,7 @@
 }
 
 #invoice-POS {
-  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.306);
   padding: 2mm;
   margin: 0 auto;
   width: 70%;
@@ -196,18 +196,21 @@ p {
 #top {
   min-height: 100px;
 }
+
 #mid {
   min-height: 80px;
 }
+
 #bot {
   min-height: 50px;
 }
 
 #top .logo {
-  height: 60px;
-  width: 60px;
+  height: 120px;
+  width: 120px;
   background: url("../../../public/assets/images/logo.png") no-repeat;
-  background-size: 60px 60px;
+  background-size: 120px 120px;
+  margin: 1rem;
 }
 
 .location_image{
@@ -221,6 +224,7 @@ p {
 .info {
   display: block;
   margin-left: 0;
+  margin: 1rem;
 }
 .title {
   float: right;
