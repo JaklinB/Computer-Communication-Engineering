@@ -26,7 +26,7 @@ const Blog = () => {
             <h1>{blog.title}</h1>
             <div className='blog-subCategory'>
               {blog.subCategory.map((category, i) => (
-                <div key={i}>
+                <div key={blog.id}>
                   <Chip label={category} />
                 </div>
               ))}

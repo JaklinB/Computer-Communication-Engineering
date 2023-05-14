@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
-import "firebase/compat/storage";
-import firebase from "firebase/compat/app";
-import firebaseConfig from "../../config/firebaseConfig";
+import { auth, firestore } from "firebase/compat/app";
+import firebase from "../../config/firebase";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./styles.css";
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
 const Register = () => {
   const { t } = useTranslation("loginPage");
@@ -33,6 +27,7 @@ const Register = () => {
         db.collection("users").doc(user.uid).set({
           firstName,
           lastName,
+          email,
           role,
           isAdmin,
         });
@@ -87,7 +82,7 @@ const Register = () => {
             />
           </label>
           <button type="submit">{t("register_submit")}</button>
-        </form>{" "}
+        </form>
         <p>
           {t("already_registered")}{" "}
           <Link to="/login" style={{ fontWeight: "bold" }}>

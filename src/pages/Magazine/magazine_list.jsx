@@ -39,8 +39,8 @@ const MagazineList = () => {
         handleSearchKey={(e) => setSearchKey(e.target.value)}
       />
 
-      {/* Blog List & Empty View */}
-      {!blogs.length ? <EmptyList /> : <BlogList blogs={blogs} />}
+    {/* Blog List & Empty View 
+      {!blogs.length ? <EmptyList /> : <BlogList blogs={blogs} />} */}
     </div>
   );
 };

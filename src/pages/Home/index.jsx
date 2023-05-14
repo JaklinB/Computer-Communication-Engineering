@@ -4,9 +4,9 @@ import EmptyList from "../../components/common/EmptyList";
 import BlogList from "../../components/BlogList";
 import { blogList } from "../../config/data";
 
-const Home = () => {
+const Home = ({ isAdmin }) => {
   const [blogs, setBlogs] = useState(blogList);
-
+  console.log(isAdmin);
   return (
     <div>
       <Header />
