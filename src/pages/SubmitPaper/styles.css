@@ -66,12 +66,13 @@
   p {
     margin: 10px 0;
     font-size: 16px;
-    display: grid;
+    display: block;
     text-align: start;
   }
   
   p a {
     color: #5767aa;
+    font-weight: 600;
     text-decoration: none;
   }
   
