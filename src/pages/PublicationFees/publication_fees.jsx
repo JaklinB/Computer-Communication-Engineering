@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FaCopy } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import "./styles.css";
 
@@ -9,12 +9,21 @@ function PublicationFees() {
 
   containers.forEach((container) => {
     container.addEventListener("click", () => {
-      containers.forEach((container) =>
-        container.classList.remove("active")
-      );
+      containers.forEach((container) => container.classList.remove("active"));
       container.classList.add("active");
     });
   });
+
+  function copyToClipboard(text) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        console.log("Text copied to clipboard: ", text);
+      })
+      .catch((error) => {
+        console.error("Failed to copy text: ", error);
+      });
+  }
 
   return (
     <div>
@@ -29,7 +38,10 @@ function PublicationFees() {
               </div>
             </div>
           </div>
-          <div className="package-name" data-translation={t('publication_fee_label')}></div>
+          <div
+            className="package-name"
+            data-translation={t("publication_fee_label")}
+          ></div>
         </div>
         <div className="table premium">
           <div className="ribbon">
@@ -43,10 +55,13 @@ function PublicationFees() {
               </div>
             </div>
           </div>
-          <div className="package-name" data-translation={t('publication_fee_year_label')}></div>
+          <div
+            className="package-name"
+            data-translation={t("publication_fee_year_label")}
+          ></div>
           <ul className="features">
             <li>
-              <span className="list-name">{t('including_postage')}</span>
+              <span className="list-name">{t("including_postage")}</span>
               <span className="icon check">
                 <i className="fas fa-check"></i>
               </span>
@@ -66,10 +81,17 @@ function PublicationFees() {
         <div id="mid">
           <div className="info">
             <h2>{t("invoice_details")}</h2>
-            <p>{t("address")}</p>
-            <div className="location_image">
-             
+            <div className="tableitem-right">
+              <p>{t("address")}</p>
+              <button
+                className="copy-button"
+                onClick={() => copyToClipboard(t("address"))}
+              >
+                <FaCopy />
+              </button>
             </div>
+
+            <div className="location_image"></div>
           </div>
         </div>
 
@@ -80,56 +102,100 @@ function PublicationFees() {
                 <td className="tableitem">
                   <p className="itemtext">{t("bank_transfer_label")}</p>
                 </td>
-                <td className="tableitem">
+                <td className="tableitem-right">
                   <p className="itemtext">{t("bank_transfer_info")}</p>
+                  <button
+                    className="copy-button"
+                    onClick={() => copyToClipboard(t("bank_transfer_info"))}
+                  >
+                    <FaCopy />
+                  </button>
                 </td>
               </tr>
               <tr className="service">
                 <td className="tableitem">
                   <p className="itemtext">{t("UIC_label")}</p>
                 </td>
-                <td className="tableitem">
+                <td className="tableitem-right">
                   <p className="itemtext">{t("UIC_info")}</p>
+                  <button
+                    className="copy-button"
+                    onClick={() => copyToClipboard(t("UIC_info"))}
+                  >
+                    <FaCopy />
+                  </button>
                 </td>
               </tr>
               <tr className="service">
                 <td className="tableitem">
                   <p className="itemtext">{t("VAT_label")}</p>
                 </td>
-                <td className="tableitem">
+                <td className="tableitem-right">
                   <p className="itemtext">{t("VAT_info")}</p>
+                  <button
+                    className="copy-button"
+                    onClick={() => copyToClipboard(t("VAT_info"))}
+                  >
+                    <FaCopy />
+                  </button>
                 </td>
               </tr>
               <tr className="service">
                 <td className="tableitem">
                   <p className="itemtext">{t("accountable_person_label")}</p>
                 </td>
-                <td className="tableitem">
+                <td className="tableitem-right">
                   <p className="itemtext">{t("accountable_person_info")}</p>
+                  <button
+                    className="copy-button"
+                    onClick={() =>
+                      copyToClipboard(t("accountable_person_info"))
+                    }
+                  >
+                    <FaCopy />
+                  </button>
                 </td>
               </tr>
               <tr className="service">
                 <td className="tableitem">
                   <p className="itemtext">{t("IBAN_label")}</p>
                 </td>
-                <td className="tableitem">
+                <td className="tableitem-right">
                   <p className="itemtext">{t("IBAN_info")}</p>
+                  <button
+                    className="copy-button"
+                    onClick={() => copyToClipboard(t("IBAN_info"))}
+                  >
+                    <FaCopy />
+                  </button>
                 </td>
               </tr>
               <tr className="service">
                 <td className="tableitem">
                   <p className="itemtext">{t("BIC_label")}</p>
                 </td>
-                <td className="tableitem">
+                <td className="tableitem-right">
                   <p className="itemtext">{t("BIC_info")}</p>
+                  <button
+                    className="copy-button"
+                    onClick={() => copyToClipboard(t("BIC_info"))}
+                  >
+                    <FaCopy />
+                  </button>
                 </td>
               </tr>
               <tr className="service">
                 <td className="tableitem">
                   <p className="itemtext">{t("contract_num_label")}</p>
                 </td>
-                <td className="tableitem">
+                <td className="tableitem-right">
                   <p className="itemtext">{t("contract_num_info")}</p>
+                  <button
+                    className="copy-button"
+                    onClick={() => copyToClipboard(t("contract_num_info"))}
+                  >
+                    <FaCopy />
+                  </button>
                 </td>
               </tr>
             </table>
