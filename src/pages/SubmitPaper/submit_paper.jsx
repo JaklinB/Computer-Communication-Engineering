@@ -25,6 +25,12 @@ function SubmitPaper() {
     xhr.send(JSON.stringify(formData));
   }
 
+  const openFormattingGuidelines = (event) => {
+    event.preventDefault();
+    const filePath = "/assets/Formatting_Guidelines_EN.pdf";
+    window.open(filePath, "_blank");
+  };
+
   return (
     <div>
       <h1>{t("submit_paper_title")}</h1>
@@ -33,7 +39,8 @@ function SubmitPaper() {
         {t("submit_paper_publication_fee_rest")}
       </p>
       <p>
-        {t("submit_paper_submissions")} {t("submit_paper_formatting")}
+        {t("submit_paper_submissions")}{" "}
+        <a onClick={openFormattingGuidelines}>{t("submit_paper_formatting")}</a>
       </p>
       <br />
       <form
