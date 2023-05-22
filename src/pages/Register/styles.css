@@ -81,3 +81,24 @@ p a:hover {
   text-decoration: underline;
 }
 
+.password-input{
+  width: 100%;
+}
+
+.password-toggle-button{
+  background: none;
+  color: #29335c;
+  padding: 0%;
+}
+
+.password-toggle-button:hover{
+  background: none;
+  color: #5767aa;
+  padding: 0%;
+}
+
+.password-input-container{
+  display: flex;
+  justify-content: space-between;
+}
+

@@ -3,7 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { RiEyeFill, RiEyeOffFill } from "react-icons/ri"; // Import eye icons
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri"; 
 import "./styles.css";
 
 const LoginPage = () => {
@@ -14,7 +14,7 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // Track whether password is visible or not
+  const [showPassword, setShowPassword] = useState(false); 
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleEmailChange = (e) => {

@@ -3,6 +3,7 @@ import { auth, firestore } from "firebase/compat/app";
 import firebase from "../../config/firebase";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 import "./styles.css";
 
 const Register = () => {
@@ -12,6 +13,7 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -38,6 +40,14 @@ const Register = () => {
       });
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
   return (
     <div>
       <h1>{t("register_title")}</h1>
@@ -61,12 +71,22 @@ const Register = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input
-            type="password"
-            placeholder={t("register_password")}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+           <div className="password-input-container">
+            <input
+            className="password-input"
+              type={showPassword ? "text" : "password"}
+              placeholder={t("login_password")}
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            <button
+              type="button"
+              className="password-toggle-button"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
+            </button>
+          </div>
           <select value={role} onChange={(e) => setRole(e.target.value)}>
             <option value="">{t("register_role")}</option>
             <option value="student">{t("register_role_student")}</option>
