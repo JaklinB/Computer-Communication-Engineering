@@ -3,6 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { RiEyeFill, RiEyeOffFill } from "react-icons/ri"; // Import eye icons
 import "./styles.css";
 
 const LoginPage = () => {
@@ -13,6 +14,7 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Track whether password is visible or not
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleEmailChange = (e) => {
@@ -21,6 +23,10 @@ const LoginPage = () => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   const handleSubmit = (e) => {
@@ -52,12 +58,22 @@ const LoginPage = () => {
             onChange={handleEmailChange}
           />
           <br />
-          <input
-            type="password"
-            placeholder={t("login_password")}
-            value={password}
-            onChange={handlePasswordChange}
-          />
+          <div className="password-input-container">
+            <input
+            className="password-input"
+              type={showPassword ? "text" : "password"}
+              placeholder={t("login_password")}
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            <button
+              type="button"
+              className="password-toggle-button"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <RiEyeFill /> : <RiEyeOffFill />}
+            </button>
+          </div>
           <Link
             to="/forgot-password"
             style={{
