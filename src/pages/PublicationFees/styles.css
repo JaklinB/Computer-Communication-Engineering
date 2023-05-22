@@ -69,6 +69,11 @@
   justify-content: space-around;
 }
 
+.features {
+  padding: 0px;
+  text-align: center;
+}
+
 .basic ::selection,
 .basic .price-area,
 .basic .inner-area {
