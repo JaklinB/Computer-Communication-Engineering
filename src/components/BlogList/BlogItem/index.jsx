@@ -1,5 +1,8 @@
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Chip from "../../common/Chip";
+import firebase from "firebase/compat/app";
+import "firebase/compat/storage";
 import "./styles.css";
 
 const BlogItem = ({
@@ -11,13 +14,53 @@ const BlogItem = ({
     authorAvatar,
     cover,
     category,
+    subCategories,
     id,
   },
 }) => {
+  const [imageUrl, setImageUrl] = useState(null);
+  const storage = firebase.storage();
+  const storageRef = storage.ref();
+
+  useEffect(() => {
+    async function getImageUrlFromStorage() {
+      try {
+        const storageRef = firebase.storage().ref();
+        const imageRef = storageRef.child(`articles/${id}/image`);
+        const imageUrl = await imageRef.getDownloadURL();
+        setImageUrl(imageUrl);
+      } catch (error) {
+        console.error("Error getting image URL:", error);
+      }
+    }
+
+    getImageUrlFromStorage();
+  }, [cover, id]);
+
   return (
-    <Link className="blogItem-link" to={`/blog/${id}`}>
+    <Link
+      className="blogItem-link"
+      to={{
+        pathname: `/articles/${id}`,
+        state: {
+          blog: {
+            description,
+            title,
+            createdAt,
+            authorName,
+            authorAvatar,
+            cover,
+            category,
+            subCategories,
+            id,
+          },
+        },
+      }}
+    >
       <div className="blogItem-wrap">
-        <img className="blogItem-cover" src={cover} alt="cover" />
+        {imageUrl && (
+          <img className="blogItem-cover" src={imageUrl} alt="cover" />
+        )}
         <div className="description">
           <Chip label={category} />
           <h3>{title}</h3>
@@ -32,7 +75,7 @@ const BlogItem = ({
             </div>
           </div>
         </footer>
-      </div>{" "}
+      </div>
     </Link>
   );
 };

@@ -1,46 +1,61 @@
-import React, { useState } from 'react';
-import EmptyList from '../../components/common/EmptyList';
-import BlogList from '../../components/BlogList';
-import SearchBar from '../../components/SearchBar';
-import { blogList } from '../../config/data';
+import React, { useState, useEffect } from "react";
+import EmptyList from "../../components/common/EmptyList";
+import BlogList from "../../components/BlogList";
+import SearchBar from "../../components/SearchBar";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
-const MagazineList = () => {
-  const [blogs, setBlogs] = useState(blogList);
-  const [searchKey, setSearchKey] = useState('');
+const MagazineList = ({ isAdmin }) => {
+  const [blogs, setBlogs] = useState([]);
+  const [searchKey, setSearchKey] = useState("");
 
-  // Search submit
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const firestore = firebase.firestore();
+        const snapshot = await firestore.collection("articles").get();
+        const articles = snapshot.docs.map((doc) => doc.data());
+        setBlogs(articles);
+      } catch (error) {
+        console.error("Error fetching articles: ", error);
+      }
+    };
+
+    fetchArticles();
+  }, []);
+
   const handleSearchBar = (e) => {
     e.preventDefault();
     handleSearchResults();
   };
 
-  // Search for blog by category
   const handleSearchResults = () => {
-    const allBlogs = blogList;
-    const filteredBlogs = allBlogs.filter((blog) =>
+    const filteredBlogs = blogs.filter((blog) =>
       blog.category.toLowerCase().includes(searchKey.toLowerCase().trim())
     );
     setBlogs(filteredBlogs);
   };
 
-  // Clear search and show all blogs
   const handleClearSearch = () => {
-    setBlogs(blogList);
-    setSearchKey('');
+    setSearchKey("");
   };
 
   return (
     <div>
-      {/* Search Bar */}
       <SearchBar
         value={searchKey}
         clearSearch={handleClearSearch}
         formSubmit={handleSearchBar}
         handleSearchKey={(e) => setSearchKey(e.target.value)}
       />
-
-    {/* Blog List & Empty View 
-      {!blogs.length ? <EmptyList /> : <BlogList blogs={blogs} />} */}
+     
+      {isAdmin && (
+        <Link to="/add-article">
+          <button>Add Article</button>
+        </Link>
+      )}
+      {!blogs.length ? <EmptyList /> : <BlogList blogs={blogs} />}
     </div>
   );
 };

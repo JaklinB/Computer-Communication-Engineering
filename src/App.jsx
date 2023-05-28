@@ -10,6 +10,7 @@ import AuthorsPage from "./pages/Authors/authors";
 import MagazineList from "./pages/Magazine/magazine_list";
 import SubmitPaper from "./pages/SubmitPaper/submit_paper";
 import PublicationFees from "./pages/PublicationFees/publication_fees";
+import AddArticle from "./pages/AddArticle/add_article";
 import "./App.css";
 import "firebase/auth";
 import "firebase/firestore";
@@ -57,14 +58,15 @@ const App = () => {
     <div className="container">
       <Routes>
         <Route path="/" element={<Home isAdmin={isAdmin} />} />
-        <Route path="/list" element={<MagazineList />} />
-        <Route path="/blog/:id" element={<Blog />} />
+        <Route path="/list" element={<MagazineList isAdmin={isAdmin}/>} />
+        <Route exact path="/articles/:id" element={<Blog />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/authors" element={<AuthorsPage />} />
         <Route path="/submit-paper" element={<SubmitPaper />} />
         <Route path="/publication-fee" element={<PublicationFees />} />
+        <Route path="/add-article" element={<AddArticle userId={user ? user.uid : null} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
