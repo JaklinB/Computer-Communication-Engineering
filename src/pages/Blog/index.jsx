@@ -12,6 +12,7 @@ const Blog = () => {
   const [blog, setBlog] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [pdfUrl, setPdfUrl] = useState(null);
+  const [formattedDate, setFormattedDate] = useState(null);
 
   useEffect(() => {
     async function getBlogFromDatabase() {
@@ -21,6 +22,18 @@ const Blog = () => {
         if (doc.exists) {
           const blogData = doc.data();
           setBlog(blogData);
+          const created = {
+            seconds: blogData.createdAt.seconds,
+            nanoseconds: blogData.createdAt.nanoseconds,
+          };
+          const dateInSeconds = created.seconds;
+          const createdAtDate = new Date(dateInSeconds * 1000);
+          const formattedDate = createdAtDate.toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
+          setFormattedDate(formattedDate);
         }
       } catch (error) {
         console.error("Error getting blog:", error);
@@ -59,7 +72,7 @@ const Blog = () => {
       {blog ? (
         <div className="blog-wrap">
           <header>
-            <p className="blog-date">{blog.createdAt}</p>
+            <p className="blog-date">{formattedDate}</p>
             <h1>{blog.title}</h1>
             <div className="blog-subCategory">
               {blog.subcategories.split(",").map((category, i) => (

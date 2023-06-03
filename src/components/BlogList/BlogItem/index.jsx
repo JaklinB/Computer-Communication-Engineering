@@ -20,7 +20,16 @@ const BlogItem = ({
 }) => {
   const [imageUrl, setImageUrl] = useState(null);
   const storage = firebase.storage();
-  const storageRef = storage.ref();
+  const created = { seconds: createdAt.seconds, nanoseconds: createdAt.nanoseconds};
+  const dateInSeconds = created.seconds;
+  const createdAtDate = new Date(dateInSeconds * 1000);
+  const formattedDate = createdAtDate.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  console.log(formattedDate);
 
   useEffect(() => {
     async function getImageUrlFromStorage() {
@@ -71,7 +80,7 @@ const BlogItem = ({
             <img src={authorAvatar} alt="avatar" />
             <div>
               <h6>{authorName}</h6>
-              <p>{createdAt}</p>
+              <p>{formattedDate}</p>
             </div>
           </div>
         </footer>

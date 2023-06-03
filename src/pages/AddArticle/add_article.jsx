@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import firebase from "../../config/firebase";
 import { v4 as uuidv4 } from 'uuid';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const AddArticle = ({ userId }) => {
   const [title, setTitle] = useState('');
@@ -8,7 +10,7 @@ const AddArticle = ({ userId }) => {
   const [subcategories, setSubcategories] = useState('');
   const [description, setDescription] = useState('');
   const [authorNames, setAuthorNames] = useState('');
-  const [createdAt, setCreatedAt] = useState('');
+  const [createdAt, setCreatedAt] = useState(new Date());
   const [image, setImage] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
 
@@ -32,8 +34,8 @@ const AddArticle = ({ userId }) => {
     setAuthorNames(event.target.value);
   };
 
-  const handleCreatedAtChange = (event) => {
-    setCreatedAt(event.target.value);
+  const handleCreatedAtChange = (date) => {
+    setCreatedAt(date);
   };
 
   const handleImageFileChange = (event) => {
@@ -50,7 +52,7 @@ const AddArticle = ({ userId }) => {
     const storage = firebase.storage();
     const storageRef = storage.ref();
 
-    const articleId = uuidv4(); 
+    const articleId = uuidv4();
 
     const articleData = {
       id: articleId,
@@ -71,7 +73,8 @@ const AddArticle = ({ userId }) => {
 
         if (image) {
           const imageStorageRef = storageRef.child(`articles/${articleId}/image`);
-          imageStorageRef.put(image)
+          imageStorageRef
+            .put(image)
             .then(() => {
               console.log('Image file uploaded successfully');
             })
@@ -82,7 +85,8 @@ const AddArticle = ({ userId }) => {
 
         if (pdfFile) {
           const pdfStorageRef = storageRef.child(`articles/${articleId}/pdf`);
-          pdfStorageRef.put(pdfFile)
+          pdfStorageRef
+            .put(pdfFile)
             .then(() => {
               console.log('PDF file uploaded successfully');
             })
@@ -96,7 +100,7 @@ const AddArticle = ({ userId }) => {
         setSubcategories('');
         setDescription('');
         setAuthorNames('');
-        setCreatedAt('');
+        setCreatedAt(new Date());
         setImage(null);
         setPdfFile(null);
       })
@@ -149,10 +153,9 @@ const AddArticle = ({ userId }) => {
         />
 
         <label htmlFor="createdAt">Created At:</label>
-        <input
-          type="text"
+        <DatePicker
           id="createdAt"
-          value={createdAt}
+          selected={createdAt}
           onChange={handleCreatedAtChange}
         />
 
