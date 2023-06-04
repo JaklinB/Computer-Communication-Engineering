@@ -43,18 +43,17 @@ const MagazineList = ({ isAdmin }) => {
 
   return (
     <div>
+      {isAdmin && (
+        <Link to="/add-article">
+          <button>Add Article</button>
+        </Link>
+      )}
       <SearchBar
         value={searchKey}
         clearSearch={handleClearSearch}
         formSubmit={handleSearchBar}
         handleSearchKey={(e) => setSearchKey(e.target.value)}
       />
-     
-      {isAdmin && (
-        <Link to="/add-article">
-          <button>Add Article</button>
-        </Link>
-      )}
       {!blogs.length ? <EmptyList /> : <BlogList blogs={blogs} />}
     </div>
   );

@@ -1,0 +1,14 @@
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.error input[type="text"],
+.error textarea {
+  border: 1px solid red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
