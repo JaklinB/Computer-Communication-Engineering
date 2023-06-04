@@ -9,6 +9,13 @@
     "add_date":"Публикувана на:",
     "add_image":"Снимка:",
     "add_pdf":"PDF файл:",
+
+    "add_title_empty":"Въведете заглавие",
+    "add_category_empty":"Въведете категория",
+    "add_subcategories_empty":"Въведете подкатегории",
+    "add_description_empty":"Въведете описание",
+    "add_authors_empty":"Въведете имена на автори",
+    "add_image_empty":"Добавете снимка",
     
     "submit":"Добави"
 }

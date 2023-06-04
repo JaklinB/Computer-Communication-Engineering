@@ -58,27 +58,27 @@ const AddArticle = ({ userId }) => {
     const errors = {};
 
     if (title.trim() === "") {
-      errors.title = "Please enter a title";
+      errors.title = t("add_title_empty");
     }
 
     if (category.trim() === "") {
-      errors.category = "Please enter a category";
+      errors.category = t("add_category_empty");
     }
 
     if (subcategories.trim() === "") {
-      errors.subcategories = "Please enter subcategories";
+      errors.subcategories = t("add_subcategories_empty");
     }
 
     if (description.trim() === "") {
-      errors.description = "Please enter a description";
+      errors.description = t("add_description_empty");
     }
 
     if (authorNames.trim() === "") {
-      errors.authorNames = "Please enter author names";
+      errors.authorNames = t("add_authors_empty");
     }
 
     if (image === null) {
-      errors.image = "Please import an image";
+      errors.image = t("add_image_empty");
     }
 
     setErrors(errors);
