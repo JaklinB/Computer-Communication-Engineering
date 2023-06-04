@@ -4,11 +4,14 @@ import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 import "./styles.css";
 
 const AddArticle = ({ userId }) => {
   const { t } = useTranslation("addArticle");
-  
+
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [subcategories, setSubcategories] = useState("");
@@ -146,6 +149,8 @@ const AddArticle = ({ userId }) => {
         setCreatedAt(new Date());
         setImage(null);
         setPdfFile(null);
+
+        navigate(-1);
       })
       .catch((error) => {
         console.error("Error storing article data:", error);
