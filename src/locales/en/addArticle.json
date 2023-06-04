@@ -6,6 +6,7 @@
     "add_subcategories":"Subcategories:",
     "add_description":"Description:",
     "add_authors":"Author Names:",
+    "add_volume": "Volume:",
     "add_date":"Created At:",
     "add_image":"Image:",
     "add_pdf":"PDF File:",
@@ -15,6 +16,7 @@
     "add_subcategories_empty":"Please enter subcategories",
     "add_description_empty":"Please enter a description",
     "add_authors_empty":"Please enter author names",
+    "add_volume_empty":"Please enter volume",
     "add_image_empty":"Please import an image",
     
     "submit":"Submit"

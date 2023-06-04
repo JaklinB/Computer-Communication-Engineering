@@ -18,6 +18,7 @@ const AddArticle = ({ userId }) => {
   const [description, setDescription] = useState("");
   const [authorNames, setAuthorNames] = useState("");
   const [createdAt, setCreatedAt] = useState(new Date());
+  const [volume, setVolume] = useState("");
   const [image, setImage] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
   const [errors, setErrors] = useState({});
@@ -44,6 +45,10 @@ const AddArticle = ({ userId }) => {
 
   const handleCreatedAtChange = (date) => {
     setCreatedAt(date);
+  };
+
+  const handleVolumeChange = (event) => {
+    setVolume(event.target.value);
   };
 
   const handleImageFileChange = (event) => {
@@ -77,6 +82,10 @@ const AddArticle = ({ userId }) => {
       errors.authorNames = t("add_authors_empty");
     }
 
+    if (volume.trim() === "") {
+      errors.volume = t("add_volume_empty");
+    }
+
     if (image === null) {
       errors.image = t("add_image_empty");
     }
@@ -106,6 +115,7 @@ const AddArticle = ({ userId }) => {
       description,
       authorNames,
       createdAt,
+      volume,
     };
 
     const db = firebase.firestore();
@@ -147,6 +157,7 @@ const AddArticle = ({ userId }) => {
         setDescription("");
         setAuthorNames("");
         setCreatedAt(new Date());
+        setVolume("");
         setImage(null);
         setPdfFile(null);
 
@@ -221,6 +232,19 @@ const AddArticle = ({ userId }) => {
           />
           {errors.authorNames && (
             <div className="error-message">{errors.authorNames}</div>
+          )}
+        </div>
+
+        <div className={`form-field ${errors.volume ? "error" : ""}`}>
+          <label htmlFor="volume">{t("add_volume")}</label>
+          <input
+            type="text"
+            id="volume"
+            value={volume}
+            onChange={handleVolumeChange}
+          />
+          {errors.volume && (
+            <div className="error-message">{errors.volume}</div>
           )}
         </div>
 

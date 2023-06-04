@@ -6,6 +6,7 @@
     "add_subcategories":"Подкатегории:",
     "add_description":"Описание:",
     "add_authors":"Имена на автори:",
+    "add_volume": "Брой:",
     "add_date":"Публикувана на:",
     "add_image":"Снимка:",
     "add_pdf":"PDF файл:",
@@ -15,6 +16,7 @@
     "add_subcategories_empty":"Въведете подкатегории",
     "add_description_empty":"Въведете описание",
     "add_authors_empty":"Въведете имена на автори",
+    "add_volume_empty":"Въведете брой на статията",
     "add_image_empty":"Добавете снимка",
     
     "submit":"Добави"

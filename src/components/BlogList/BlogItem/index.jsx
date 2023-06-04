@@ -10,7 +10,7 @@ const BlogItem = ({
     description,
     title,
     createdAt,
-    authorName,
+    authorNames,
     authorAvatar,
     cover,
     category,
@@ -19,17 +19,20 @@ const BlogItem = ({
   },
 }) => {
   const [imageUrl, setImageUrl] = useState(null);
+  const [volume, setVolume] = useState(null);
+
   const storage = firebase.storage();
-  const created = { seconds: createdAt.seconds, nanoseconds: createdAt.nanoseconds};
+  const created = {
+    seconds: createdAt.seconds,
+    nanoseconds: createdAt.nanoseconds,
+  };
   const dateInSeconds = created.seconds;
   const createdAtDate = new Date(dateInSeconds * 1000);
   const formattedDate = createdAtDate.toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
-
-  console.log(formattedDate);
 
   useEffect(() => {
     async function getImageUrlFromStorage() {
@@ -43,7 +46,22 @@ const BlogItem = ({
       }
     }
 
+    async function getVolumeFromFirebase() {
+      try {
+        const db = firebase.firestore();
+        const articleRef = db.collection("articles").doc(id);
+        const articleSnapshot = await articleRef.get();
+        const articleData = articleSnapshot.data();
+        if (articleData) {
+          setVolume(articleData.volume);
+        }
+      } catch (error) {
+        console.error("Error getting volume from Firebase:", error);
+      }
+    }
+
     getImageUrlFromStorage();
+    getVolumeFromFirebase();
   }, [cover, id]);
 
   return (
@@ -56,7 +74,7 @@ const BlogItem = ({
             description,
             title,
             createdAt,
-            authorName,
+            authorNames,
             authorAvatar,
             cover,
             category,
@@ -72,16 +90,14 @@ const BlogItem = ({
         )}
         <div className="description">
           <Chip label={category} />
-          <h3>{title}</h3>
+          <h4>{title}</h4>
           <p className="blogItem-desc">{description}</p>
         </div>
         <footer>
-          <div className="blogItem-author">
-            <img src={authorAvatar} alt="avatar" />
-            <div>
-              <h6>{authorName}</h6>
-              <p>{formattedDate}</p>
-            </div>
+        <p className="authors">{authorNames}</p>
+          <div className="blogItem-footer">
+            <p>{volume}</p>
+            <p>{formattedDate}</p>
           </div>
         </footer>
       </div>

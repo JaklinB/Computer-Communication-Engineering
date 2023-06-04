@@ -24,7 +24,13 @@
   margin-right: 1rem;
   margin-top: 0.5rem;
 }
+
 .blog-desc {
   padding: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 20px;
+}
+
+.first-letter {
+  font-size: 2em;
+  font-weight: bold;
 }

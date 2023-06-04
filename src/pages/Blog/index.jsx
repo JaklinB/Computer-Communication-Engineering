@@ -83,7 +83,10 @@ const Blog = () => {
             </div>
           </header>
           {imageUrl && <img src={imageUrl} alt="cover" />}
-          <p className="blog-desc">{blog.description}</p>
+          <p className="blog-desc">
+            <span className="first-letter">{blog.description.charAt(0)}</span>
+            {blog.description.slice(1)}
+          </p>
           {pdfUrl ? <PDFViewer pdfUrl={pdfUrl} /> : null}
         </div>
       ) : (

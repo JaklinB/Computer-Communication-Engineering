@@ -22,7 +22,7 @@
   filter: brightness(0.7);
 }
 
-.blogItem-wrap h3 {
+.blogItem-wrap h4 {
   margin: 0.5rem 0 1rem 0;
   flex: 1;
   color: black;
@@ -69,21 +69,17 @@
   transform: scale(1.01);
 }
 
-.blogItem-author {
-  display: flex;
-  align-items: center;
+.blogItem-footer {
+  display: grid;
 }
 
-.blogItem-author img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 0.5rem;
-}
-
-.blogItem-author p {
+.blogItem-footer p {
   font-size: 0.6rem;
-  color: black;
-  font-weight: 600;
+  margin: 0;
 }
+
+.authors{
+  font-size: 0.8rem;
+  color: black;
+}
+
