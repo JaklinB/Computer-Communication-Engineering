@@ -6,6 +6,10 @@ import logoImage from "./logo_magazine_full.jpg";
 const Journal = () => {
   const { t } = useTranslation("journal");
 
+  const handleEmailClick = () => {
+    window.location.href = "mailto:computer_engineering@tu-sofia.bg";
+  };
+
   return (
     <div className="about-us">
       <div className="about-us-header">
@@ -25,7 +29,9 @@ const Journal = () => {
             </div>
             <div className="info-item">
               <span className="icon">✉️</span>
-              <p>computer_engineering@tu-sofia.bg</p>
+              <p onClick={handleEmailClick} className="email-link">
+                computer_engineering@tu-sofia.bg
+              </p>
             </div>
             <div className="info-item">
               <span className="icon">✍️</span>
@@ -38,7 +44,7 @@ const Journal = () => {
           </div>
         </div>
       </div>
-      <br></br>
+      <br />
       <div className="paragraphs">
         <p className="description">{t("detailed_description_p1")}</p>
         <p className="description">{t("detailed_description_p2")}</p>
