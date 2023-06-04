@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import firebase from "../../config/firebase";
-import { v4 as uuidv4 } from 'uuid';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import './styles.css';
+import { v4 as uuidv4 } from "uuid";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./styles.css";
 
 const AddArticle = ({ userId }) => {
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const [subcategories, setSubcategories] = useState('');
-  const [description, setDescription] = useState('');
-  const [authorNames, setAuthorNames] = useState('');
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [subcategories, setSubcategories] = useState("");
+  const [description, setDescription] = useState("");
+  const [authorNames, setAuthorNames] = useState("");
   const [createdAt, setCreatedAt] = useState(new Date());
   const [image, setImage] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
@@ -51,28 +51,28 @@ const AddArticle = ({ userId }) => {
   const validateForm = () => {
     const errors = {};
 
-    if (title.trim() === '') {
-      errors.title = 'Please enter a title';
+    if (title.trim() === "") {
+      errors.title = "Please enter a title";
     }
 
-    if (category.trim() === '') {
-      errors.category = 'Please enter a category';
+    if (category.trim() === "") {
+      errors.category = "Please enter a category";
     }
 
-    if (subcategories.trim() === '') {
-      errors.subcategories = 'Please enter subcategories';
+    if (subcategories.trim() === "") {
+      errors.subcategories = "Please enter subcategories";
     }
 
-    if (description.trim() === '') {
-      errors.description = 'Please enter a description';
+    if (description.trim() === "") {
+      errors.description = "Please enter a description";
     }
 
-    if (authorNames.trim() === '') {
-      errors.authorNames = 'Please enter author names';
+    if (authorNames.trim() === "") {
+      errors.authorNames = "Please enter author names";
     }
 
     if (image === null) {
-      errors.image = 'Please import an image';
+      errors.image = "Please import an image";
     }
 
     setErrors(errors);
@@ -103,21 +103,23 @@ const AddArticle = ({ userId }) => {
     };
 
     const db = firebase.firestore();
-    db.collection('articles')
+    db.collection("articles")
       .doc(articleId)
       .set(articleData)
       .then(() => {
-        console.log('Article data stored successfully with ID:', articleId);
+        console.log("Article data stored successfully with ID:", articleId);
 
         if (image) {
-          const imageStorageRef = storageRef.child(`articles/${articleId}/image`);
+          const imageStorageRef = storageRef.child(
+            `articles/${articleId}/image`
+          );
           imageStorageRef
             .put(image)
             .then(() => {
-              console.log('Image file uploaded successfully');
+              console.log("Image file uploaded successfully");
             })
             .catch((error) => {
-              console.error('Error uploading image file:', error);
+              console.error("Error uploading image file:", error);
             });
         }
 
@@ -126,32 +128,32 @@ const AddArticle = ({ userId }) => {
           pdfStorageRef
             .put(pdfFile)
             .then(() => {
-              console.log('PDF file uploaded successfully');
+              console.log("PDF file uploaded successfully");
             })
             .catch((error) => {
-              console.error('Error uploading PDF file:', error);
+              console.error("Error uploading PDF file:", error);
             });
         }
 
-        setTitle('');
-        setCategory('');
-        setSubcategories('');
-        setDescription('');
-        setAuthorNames('');
+        setTitle("");
+        setCategory("");
+        setSubcategories("");
+        setDescription("");
+        setAuthorNames("");
         setCreatedAt(new Date());
         setImage(null);
         setPdfFile(null);
       })
       .catch((error) => {
-        console.error('Error storing article data:', error);
+        console.error("Error storing article data:", error);
       });
   };
 
   return (
-    <div>
+    <div className="form-container">
       <h1>Add Article</h1>
       <form onSubmit={handleFormSubmit}>
-        <div className={`form-field ${errors.title ? 'error' : ''}`}>
+        <div className={`form-field ${errors.title ? "error" : ""}`}>
           <label htmlFor="title">Title:</label>
           <input
             type="text"
@@ -162,7 +164,7 @@ const AddArticle = ({ userId }) => {
           {errors.title && <div className="error-message">{errors.title}</div>}
         </div>
 
-        <div className={`form-field ${errors.category ? 'error' : ''}`}>
+        <div className={`form-field ${errors.category ? "error" : ""}`}>
           <label htmlFor="category">Category:</label>
           <input
             type="text"
@@ -170,10 +172,12 @@ const AddArticle = ({ userId }) => {
             value={category}
             onChange={handleCategoryChange}
           />
-          {errors.category && <div className="error-message">{errors.category}</div>}
+          {errors.category && (
+            <div className="error-message">{errors.category}</div>
+          )}
         </div>
 
-        <div className={`form-field ${errors.subcategories ? 'error' : ''}`}>
+        <div className={`form-field ${errors.subcategories ? "error" : ""}`}>
           <label htmlFor="subcategories">Subcategories:</label>
           <input
             type="text"
@@ -181,20 +185,25 @@ const AddArticle = ({ userId }) => {
             value={subcategories}
             onChange={handleSubcategoriesChange}
           />
-          {errors.subcategories && <div className="error-message">{errors.subcategories}</div>}
+          {errors.subcategories && (
+            <div className="error-message">{errors.subcategories}</div>
+          )}
         </div>
 
-        <div className={`form-field ${errors.description ? 'error' : ''}`}>
+        <div className={`form-field ${errors.description ? "error" : ""}`}>
           <label htmlFor="description">Description:</label>
-          <textarea
+          <input
+            type="text"
             id="description"
             value={description}
             onChange={handleDescriptionChange}
-          ></textarea>
-          {errors.description && <div className="error-message">{errors.description}</div>}
+          />
+          {errors.description && (
+            <div className="error-message">{errors.description}</div>
+          )}
         </div>
 
-        <div className={`form-field ${errors.authorNames ? 'error' : ''}`}>
+        <div className={`form-field ${errors.authorNames ? "error" : ""}`}>
           <label htmlFor="authorNames">Author Names:</label>
           <input
             type="text"
@@ -202,20 +211,24 @@ const AddArticle = ({ userId }) => {
             value={authorNames}
             onChange={handleAuthorNamesChange}
           />
-          {errors.authorNames && <div className="error-message">{errors.authorNames}</div>}
+          {errors.authorNames && (
+            <div className="error-message">{errors.authorNames}</div>
+          )}
         </div>
 
-        <div className={`form-field ${errors.createdAt ? 'error' : ''}`}>
+        <div className={`form-field ${errors.createdAt ? "error" : ""}`}>
           <label htmlFor="createdAt">Created At:</label>
           <DatePicker
             id="createdAt"
             selected={createdAt}
             onChange={handleCreatedAtChange}
           />
-          {errors.createdAt && <div className="error-message">{errors.createdAt}</div>}
+          {errors.createdAt && (
+            <div className="error-message">{errors.createdAt}</div>
+          )}
         </div>
 
-        <div className={`form-field ${errors.image ? 'error' : ''}`}>
+        <div className={`form-field ${errors.image ? "error" : ""}`}>
           <label htmlFor="image">Image:</label>
           <div>
             <input
@@ -224,7 +237,9 @@ const AddArticle = ({ userId }) => {
               accept=".png,.jpeg,.jpg"
               onChange={handleImageFileChange}
             />
-            {errors.image && <div className="error-message">{errors.image}</div>}
+            {errors.image && (
+              <div className="error-message">{errors.image}</div>
+            )}
           </div>
         </div>
 
