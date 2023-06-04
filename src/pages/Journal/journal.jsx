@@ -17,12 +17,9 @@ const Journal = () => {
 
   return (
     <div className="about-us">
-      <div className="about-us-header">
-        <h1>{t("about_us")}</h1>
-      </div>
       <div className="about-us-content">
         <div className="about-us-image">
-          <img src={logoImage} alt="Company" />
+          <img src={logoImage} alt="Logo" />
         </div>
         <div className="about-us-details">
           <h2>{t("title")}</h2>
