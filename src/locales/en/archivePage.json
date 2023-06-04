@@ -1,4 +1,9 @@
 {
     "search_key_word":"Key word",
-    "search_button":"Search"
+    "search_button":"Search",
+
+    "sort_by":"Sort By:",
+    "oldest_first":"Oldest First",
+    "newest_first":"Newest First"
+
 }

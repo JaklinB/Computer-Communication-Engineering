@@ -1,4 +1,8 @@
 {
     "search_key_word":"Ключова дума",
-    "search_button":"Търси"
+    "search_button":"Търси",
+
+    "sort_by":"Сортирай по:",
+    "oldest_first":"Най-стари",
+    "newest_first":"Най-нови"
 }
