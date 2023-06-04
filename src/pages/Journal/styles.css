@@ -65,6 +65,12 @@ html body div#root div.container div.about-us div.about-us-content div.about-us-
   text-decoration: none;
 }
 
+.address-link{
+  color: #29335c;
+  cursor: pointer;
+  font-weight: 400;
+}
+
 .authors-link {
   color: #29335c;
   text-decoration: none;
@@ -74,5 +80,5 @@ html body div#root div.container div.about-us div.about-us-content div.about-us-
 .email-link {
   color: #29335c;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 400;
 }
