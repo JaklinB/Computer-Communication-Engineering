@@ -1,0 +1,68 @@
+.about-us {
+  padding: 20px;
+}
+
+.about-us-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-us-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.about-us-image img {
+  height: 300px;
+  object-fit: cover;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.about-us-details {
+  flex-grow: 1;
+}
+
+.about-us h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.about-us h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.about-us .description {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0px;
+  margin-bottom: 20px;
+}
+
+.about-us .contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-us .info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.about-us .info-item .icon {
+  font-size: 18px;
+}
+
+.about-us .info-item p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.authors-link{
+  text-decoration: none;
+}
+
+

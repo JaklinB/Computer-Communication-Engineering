@@ -9,6 +9,7 @@ import ForgotPasswordPage from "./pages/ForgotPassword/forgotPasswordPage";
 import AuthorsPage from "./pages/Authors/authors";
 import MagazineList from "./pages/Magazine/magazine_list";
 import SubmitPaper from "./pages/SubmitPaper/submit_paper";
+import Journal from "./pages/Journal/journal";
 import PublicationFees from "./pages/PublicationFees/publication_fees";
 import AddArticle from "./pages/AddArticle/add_article";
 import "./App.css";
@@ -64,6 +65,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/authors" element={<AuthorsPage />} />
+        <Route path="/journal" element={<Journal />} />
         <Route path="/submit-paper" element={<SubmitPaper />} />
         <Route path="/publication-fee" element={<PublicationFees />} />
         <Route path="/add-article" element={<AddArticle userId={user ? user.uid : null} />} />
