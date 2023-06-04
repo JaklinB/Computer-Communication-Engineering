@@ -24,6 +24,15 @@
   "forgot_password_title": "Forgot your password?",
   "forgot_password_email": "Email",
   "forgot_password_submit": "Reset password",
-  "forgot_password_success": "We have sent an email with password change information."
+  "forgot_password_success": "We have sent an email with password change information.",
+
+  "enter_email":"Enter email",
+  "enter_password":"Enter password",
+
+  "required_first_name":"First name is required",
+  "required_last_name":"Last name is required",
+  "required_email":"Email is required",
+  "required_password":"Password is required",
+  "required_role":"Role is required"
 
 }

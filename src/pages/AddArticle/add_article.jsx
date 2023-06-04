@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import firebase from "../../config/firebase";
+import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./styles.css";
 
 const AddArticle = ({ userId }) => {
+  const { t } = useTranslation("addArticle");
+  
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [subcategories, setSubcategories] = useState("");
@@ -151,10 +154,10 @@ const AddArticle = ({ userId }) => {
 
   return (
     <div className="form-container">
-      <h1>Add Article</h1>
+      <h1>{t("add_article")}</h1>
       <form onSubmit={handleFormSubmit}>
         <div className={`form-field ${errors.title ? "error" : ""}`}>
-          <label htmlFor="title">Title:</label>
+          <label htmlFor="title">{t("add_title")}</label>
           <input
             type="text"
             id="title"
@@ -165,7 +168,7 @@ const AddArticle = ({ userId }) => {
         </div>
 
         <div className={`form-field ${errors.category ? "error" : ""}`}>
-          <label htmlFor="category">Category:</label>
+          <label htmlFor="category">{t("add_category")}</label>
           <input
             type="text"
             id="category"
@@ -178,7 +181,7 @@ const AddArticle = ({ userId }) => {
         </div>
 
         <div className={`form-field ${errors.subcategories ? "error" : ""}`}>
-          <label htmlFor="subcategories">Subcategories:</label>
+          <label htmlFor="subcategories">{t("add_subcategories")}</label>
           <input
             type="text"
             id="subcategories"
@@ -191,7 +194,7 @@ const AddArticle = ({ userId }) => {
         </div>
 
         <div className={`form-field ${errors.description ? "error" : ""}`}>
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="description">{t("add_description")}</label>
           <input
             type="text"
             id="description"
@@ -204,7 +207,7 @@ const AddArticle = ({ userId }) => {
         </div>
 
         <div className={`form-field ${errors.authorNames ? "error" : ""}`}>
-          <label htmlFor="authorNames">Author Names:</label>
+          <label htmlFor="authorNames">{t("add_authors")}</label>
           <input
             type="text"
             id="authorNames"
@@ -217,7 +220,7 @@ const AddArticle = ({ userId }) => {
         </div>
 
         <div className={`form-field ${errors.createdAt ? "error" : ""}`}>
-          <label htmlFor="createdAt">Created At:</label>
+          <label htmlFor="createdAt">{t("add_date")}</label>
           <DatePicker
             id="createdAt"
             selected={createdAt}
@@ -229,7 +232,7 @@ const AddArticle = ({ userId }) => {
         </div>
 
         <div className={`form-field ${errors.image ? "error" : ""}`}>
-          <label htmlFor="image">Image:</label>
+          <label htmlFor="image">{t("add_image")}</label>
           <div>
             <input
               type="file"
@@ -243,7 +246,7 @@ const AddArticle = ({ userId }) => {
           </div>
         </div>
 
-        <label htmlFor="pdfFile">PDF File:</label>
+        <label htmlFor="pdfFile">{t("add_pdf")}</label>
         <input
           type="file"
           id="pdfFile"
@@ -251,7 +254,7 @@ const AddArticle = ({ userId }) => {
           onChange={handlePdfFileChange}
         />
 
-        <button type="submit">Submit</button>
+        <button type="submit">{t("submit")}</button>
       </form>
     </div>
   );

@@ -24,6 +24,15 @@
   "forgot_password_title": "Забравена парола",
   "forgot_password_email": "Email",
   "forgot_password_submit": "Промени паролата",
-  "forgot_password_success": "Изпратихме имейл с информация за промяна на паролата."
+  "forgot_password_success": "Изпратихме имейл с информация за промяна на паролата.",
+
+  "enter_email":"Въведете email",
+  "enter_password":"Въведете парола",
+
+  "required_first_name":"Въведете име",
+  "required_last_name":"Въведете фамилия",
+  "required_email":"Въведете Email",
+  "required_password":"Въведете парола",
+  "required_role":"Изберете роля"
 
 }

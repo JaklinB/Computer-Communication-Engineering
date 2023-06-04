@@ -1,0 +1,14 @@
+{
+    "add_article":"Добави статия",
+
+    "add_title":"Заглавие:",
+    "add_category":"Категория:",
+    "add_subcategories":"Подкатегории:",
+    "add_description":"Описание:",
+    "add_authors":"Имена на автори:",
+    "add_date":"Публикувана на:",
+    "add_image":"Снимка:",
+    "add_pdf":"PDF файл:",
+    
+    "submit":"Добави"
+}

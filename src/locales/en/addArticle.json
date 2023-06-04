@@ -1,0 +1,14 @@
+{
+    "add_article":"Add Article",
+
+    "add_title":"Title:",
+    "add_category":"Category:",
+    "add_subcategories":"Subcategories:",
+    "add_description":"Description:",
+    "add_authors":"Author Names:",
+    "add_date":"Created At:",
+    "add_image":"Image:",
+    "add_pdf":"PDF File:",
+    
+    "submit":"Submit"
+}
