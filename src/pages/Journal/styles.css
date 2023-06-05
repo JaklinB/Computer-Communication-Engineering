@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  width: 90%;
 }
 
 .about-us-image img {
@@ -29,7 +30,7 @@
 }
 
 .about-us .description {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.5;
   margin: 0px;
   margin-bottom: 20px;
@@ -56,11 +57,21 @@
   margin: 0;
 }
 
-html body div#root div.container div.about-us div.about-us-content div.about-us-details div.contact-info div.info-item p a.authors-link{
+html
+  body
+  div#root
+  div.container
+  div.about-us
+  div.about-us-content
+  div.about-us-details
+  div.contact-info
+  div.info-item
+  p
+  a.authors-link {
   text-decoration: none;
 }
 
-.address-link{
+.address-link {
   color: #29335c;
   cursor: pointer;
   font-weight: 400;
@@ -76,4 +87,68 @@ html body div#root div.container div.about-us div.about-us-content div.about-us-
   color: #29335c;
   cursor: pointer;
   font-weight: 400;
+}
+
+#ct {
+  width: 100%;
+  border: 2px solid #29335c;
+  text-align: center;
+  position: relative;
+  background-color: #5768aa5d;
+  padding: 17px;
+  margin-bottom: 3%;
+  margin-top: 1%;
+}
+
+.corner {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  transform: rotate(-45deg);
+  position: absolute;
+  background: white;
+}
+
+#left_top {
+  top: -16px;
+  left: -16px;
+  border-color: transparent transparent #29335c transparent;
+}
+
+#right_top {
+  top: -16px;
+  right: -16px;
+  border-color: transparent transparent transparent #29335c;
+}
+
+#left_bottom {
+  bottom: -16px;
+  left: -16px;
+  border-color: transparent #29335c transparent transparent;
+}
+
+#right_bottom {
+  bottom: -16px;
+  right: -16px;
+  border-color: #29335c transparent transparent transparent;
+}
+
+.more-description {
+  font-size: 22px;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  -webkit-text-stroke: 0.1px #29335c;
+}
+
+@media (max-width: 768px) {
+  .about-us-content {
+    flex-direction: column;
+  }
+
+  .about-us-image img {
+    height: auto;
+    width: 100%;
+  }
 }
