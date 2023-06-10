@@ -11,6 +11,8 @@ import "./styles.css";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
+import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 
 const Blog = ({ isAdmin, userId }) => {
   const { t } = useTranslation("blog");
@@ -22,6 +24,7 @@ const Blog = ({ isAdmin, userId }) => {
   const [formattedDate, setFormattedDate] = useState(null);
   const [likeCount, setLikeCount] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [readLater, setReadLater] = useState(false);
   const [pdfError, setPdfError] = useState(false);
 
   const navigate = useNavigate();
@@ -91,7 +94,10 @@ const Blog = ({ isAdmin, userId }) => {
     async function checkIfLiked() {
       try {
         if (userId) {
-          const articleRef = firebase.firestore().collection("articles").doc(id);
+          const articleRef = firebase
+            .firestore()
+            .collection("articles")
+            .doc(id);
           const likeRef = articleRef.collection("likes").doc(userId);
           const likeDoc = await likeRef.get();
           setLiked(likeDoc.exists);
@@ -101,11 +107,28 @@ const Blog = ({ isAdmin, userId }) => {
       }
     }
 
+    async function checkReadLaterStatus() {
+      try {
+        if (userId) {
+          const articleRef = firebase
+            .firestore()
+            .collection("articles")
+            .doc(id);
+          const readLaterRef = articleRef.collection("readLater").doc(userId);
+          const readLaterDoc = await readLaterRef.get();
+          setReadLater(readLaterDoc.exists);
+        }
+      } catch (error) {
+        console.error("Error checking read later status:", error);
+      }
+    }
+
     getBlogFromDatabase();
     getImageUrlFromStorage();
     getPdfUrlFromStorage();
     getLikeCountFromDatabase();
     checkIfLiked();
+    checkReadLaterStatus();
   }, [id, userId]);
 
   async function deleteArticle() {
@@ -152,6 +175,35 @@ const Blog = ({ isAdmin, userId }) => {
     }
   }
 
+  async function handleReadLater() {
+    try {
+      if (userId) {
+        const userRef = firebase.firestore().collection("users").doc(userId);
+        const userDoc = await userRef.get();
+  
+        if (userDoc.exists) {
+          const userData = userDoc.data();
+          const readLaterArticleIds = userData.readLater || [];
+  
+          if (readLaterArticleIds.includes(id)) {
+            await userRef.update({
+              readLater: firebase.firestore.FieldValue.arrayRemove(id),
+            });
+            setReadLater(false);
+          } else {
+            await userRef.update({
+              readLater: firebase.firestore.FieldValue.arrayUnion(id),
+            });
+            setReadLater(true);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error handling read later:", error);
+    }
+  }
+  
+
   return (
     <>
       {blog ? (
@@ -165,18 +217,28 @@ const Blog = ({ isAdmin, userId }) => {
               ) : null}
             </div>
           </header>
-          <div className="like-section">
-            <button onClick={handleLike} className="icon-button">
-              {liked ? (
-                <FavoriteIcon color="secondary" />
+          <div className="user-opinion">
+            <div className="like-section">
+              <button onClick={handleLike} className="icon-button">
+                {liked ? (
+                  <FavoriteIcon color="secondary" />
+                ) : (
+                  <FavoriteBorderIcon />
+                )}
+              </button>
+              <span className="like-count">
+                {likeCount} Like{likeCount !== 1 && "s"}
+              </span>{" "}
+            </div>
+            <button onClick={handleReadLater} className="icon-button">
+              {readLater ? (
+                <BookmarkIcon color="primary" style={{ fontSize: 30 }} />
               ) : (
-                <FavoriteBorderIcon />
+                <BookmarkBorderIcon style={{ fontSize: 30 }} />
               )}
             </button>
-            <span className="like-count">
-              {likeCount} Like{likeCount !== 1 && "s"}
-            </span>
           </div>
+
           {imageUrl && <img src={imageUrl} alt="cover" />}
           <div className="blog-subCategory">
             {Array.isArray(blog.subcategories) &&
@@ -195,7 +257,9 @@ const Blog = ({ isAdmin, userId }) => {
           ) : pdfError ? (
             <p>{t("no_pdf_for_this_article")}</p>
           ) : null}
-          {isAdmin && <button onClick={deleteArticle}>{t("delete_article")}</button>}
+          {isAdmin && (
+            <button onClick={deleteArticle}>{t("delete_article")}</button>
+          )}
         </div>
       ) : (
         <EmptyList />

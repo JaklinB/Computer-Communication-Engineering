@@ -52,11 +52,19 @@ const ProfilePage = () => {
     }
   };
 
+  const handleGoToReadLater = () => {
+    navigate("/read-later");
+  };
+
   const handleDeleteProfile = async () => {
-    if (window.confirm("Are you sure you want to delete your profile? This action cannot be undone.")) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete your profile? This action cannot be undone."
+      )
+    ) {
       try {
         await db.collection("users").doc(user.uid).delete();
-        
+
         if (userData && userData.profileImageUrl) {
           await storage.refFromURL(userData.profileImageUrl).delete();
         }
@@ -82,6 +90,7 @@ const ProfilePage = () => {
           <p>Role: {userData.role}</p>
         </div>
       )}
+      <button onClick={handleGoToReadLater}>Go to Read Later</button>
       <button onClick={handleDeleteProfile}>Delete Profile</button>
       <button onClick={handleLogout}>Logout</button>
     </div>
