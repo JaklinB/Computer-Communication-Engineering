@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import { BallTriangle } from "react-loader-spinner";
+
 import "./styles.css";
 
 const AddArticle = ({ userId }) => {
@@ -17,7 +19,7 @@ const AddArticle = ({ userId }) => {
   const [subcategories, setSubcategories] = useState([]);
   const [subcategoryInput, setSubcategoryInput] = useState("");
   const [description, setDescription] = useState("");
-  const [authors, setAuthors] = useState([]); 
+  const [authors, setAuthors] = useState([]);
   const [authorInput, setAuthorInput] = useState("");
   const [createdAt, setCreatedAt] = useState(new Date());
   const [volume, setVolume] = useState("");
@@ -25,6 +27,7 @@ const AddArticle = ({ userId }) => {
   const [pdfFile, setPdfFile] = useState(null);
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -69,7 +72,10 @@ const AddArticle = ({ userId }) => {
   const handleSubcategoryInputKeyDown = (event) => {
     if (event.key === "Enter" && subcategoryInput.trim() !== "") {
       event.preventDefault();
-      setSubcategories((prevSubcategories) => [...prevSubcategories, subcategoryInput.trim()]);
+      setSubcategories((prevSubcategories) => [
+        ...prevSubcategories,
+        subcategoryInput.trim(),
+      ]);
       setSubcategoryInput("");
     }
   };
@@ -89,9 +95,7 @@ const AddArticle = ({ userId }) => {
   };
 
   const handleRemoveAuthor = (index) => {
-    setAuthors((prevAuthors) =>
-      prevAuthors.filter((_, i) => i !== index)
-    );
+    setAuthors((prevAuthors) => prevAuthors.filter((_, i) => i !== index));
   };
 
   const validateForm = () => {
@@ -113,7 +117,7 @@ const AddArticle = ({ userId }) => {
       errors.description = t("add_description_empty");
     }
 
-    if (authors.length === 0) { 
+    if (authors.length === 0) {
       errors.authors = t("add_authors_empty");
     }
 
@@ -139,6 +143,7 @@ const AddArticle = ({ userId }) => {
     }
 
     setIsSubmitted(true);
+    setIsLoading(true);
 
     const storage = firebase.storage();
     const storageRef = storage.ref();
@@ -151,7 +156,7 @@ const AddArticle = ({ userId }) => {
       category,
       subcategories,
       description,
-      authors, 
+      authors,
       createdAt,
       volume,
     };
@@ -160,7 +165,7 @@ const AddArticle = ({ userId }) => {
     db.collection("articles")
       .doc(articleId)
       .set(articleData)
-      .then(() => {
+      .then(async () => {
         console.log("Article data stored successfully with ID:", articleId);
 
         if (image) {
@@ -175,6 +180,7 @@ const AddArticle = ({ userId }) => {
             .catch((error) => {
               console.error("Error uploading image file:", error);
             });
+          await imageStorageRef.put(image);
         }
 
         if (pdfFile) {
@@ -187,6 +193,7 @@ const AddArticle = ({ userId }) => {
             .catch((error) => {
               console.error("Error uploading PDF file:", error);
             });
+          await pdfStorageRef.put(pdfFile);
         }
 
         setTitle("");
@@ -198,11 +205,14 @@ const AddArticle = ({ userId }) => {
         setVolume("");
         setImage(null);
         setPdfFile(null);
+        setIsLoading(false);
 
         navigate(-1);
       })
       .catch((error) => {
         console.error("Error storing article data:", error);
+        setIsLoading(true);
+        setIsSubmitted(false);
       });
   };
 
@@ -210,7 +220,9 @@ const AddArticle = ({ userId }) => {
     <div className="form-container">
       <h1>{t("add_article")}</h1>
       <form onSubmit={handleFormSubmit}>
-        <div className={`form-field ${errors.title && isSubmitted ? "error" : ""}`}>
+        <div
+          className={`form-field ${errors.title && isSubmitted ? "error" : ""}`}
+        >
           <label htmlFor="title">{t("add_title")}</label>
           <input
             type="text"
@@ -218,10 +230,16 @@ const AddArticle = ({ userId }) => {
             value={title}
             onChange={handleTitleChange}
           />
-          {errors.title && isSubmitted && <div className="error-message">{errors.title}</div>}
+          {errors.title && isSubmitted && (
+            <div className="error-message">{errors.title}</div>
+          )}
         </div>
 
-        <div className={`form-field ${errors.category && isSubmitted ? "error" : ""}`}>
+        <div
+          className={`form-field ${
+            errors.category && isSubmitted ? "error" : ""
+          }`}
+        >
           <label htmlFor="category">{t("add_category")}</label>
           <input
             type="text"
@@ -234,7 +252,11 @@ const AddArticle = ({ userId }) => {
           )}
         </div>
 
-        <div className={`form-field ${errors.subcategories && isSubmitted ? "error" : ""}`}>
+        <div
+          className={`form-field ${
+            errors.subcategories && isSubmitted ? "error" : ""
+          }`}
+        >
           <label htmlFor="subcategories">{t("add_subcategories")}</label>
           <div className="tags-input">
             {subcategories.map((subcategory, index) => (
@@ -262,7 +284,11 @@ const AddArticle = ({ userId }) => {
           )}
         </div>
 
-        <div className={`form-field ${errors.description && isSubmitted ? "error" : ""}`}>
+        <div
+          className={`form-field ${
+            errors.description && isSubmitted ? "error" : ""
+          }`}
+        >
           <label htmlFor="description">{t("add_description")}</label>
           <input
             type="text"
@@ -275,35 +301,43 @@ const AddArticle = ({ userId }) => {
           )}
         </div>
 
-        <div className={`form-field ${errors.authors && isSubmitted ? "error" : ""}`}>
-        <label htmlFor="authors">{t("add_authors")}</label>
-        <div className="tags-input">
-          {authors.map((author, index) => (
-            <div className="tag" key={index}>
-              {author}
-              <button
-                type="button"
-                className="remove-button"
-                onClick={() => handleRemoveAuthor(index)}
-              >
-                &times;
-              </button>
-            </div>
-          ))}
-          <input
-            type="text"
-            id="authors"
-            value={authorInput}
-            onChange={handleAuthorInputChange}
-            onKeyDown={handleAuthorInputKeyDown}
-          />
+        <div
+          className={`form-field ${
+            errors.authors && isSubmitted ? "error" : ""
+          }`}
+        >
+          <label htmlFor="authors">{t("add_authors")}</label>
+          <div className="tags-input">
+            {authors.map((author, index) => (
+              <div className="tag" key={index}>
+                {author}
+                <button
+                  type="button"
+                  className="remove-button"
+                  onClick={() => handleRemoveAuthor(index)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
+            <input
+              type="text"
+              id="authors"
+              value={authorInput}
+              onChange={handleAuthorInputChange}
+              onKeyDown={handleAuthorInputKeyDown}
+            />
+          </div>
+          {errors.authors && isSubmitted && (
+            <div className="error-message">{errors.authors}</div>
+          )}
         </div>
-        {errors.authors && isSubmitted && (
-          <div className="error-message">{errors.authors}</div>
-        )}
-      </div>
 
-        <div className={`form-field ${errors.volume && isSubmitted ? "error" : ""}`}>
+        <div
+          className={`form-field ${
+            errors.volume && isSubmitted ? "error" : ""
+          }`}
+        >
           <label htmlFor="volume">{t("add_volume")}</label>
           <input
             type="text"
@@ -316,7 +350,11 @@ const AddArticle = ({ userId }) => {
           )}
         </div>
 
-        <div className={`form-field ${errors.createdAt && isSubmitted ? "error" : ""}`}>
+        <div
+          className={`form-field ${
+            errors.createdAt && isSubmitted ? "error" : ""
+          }`}
+        >
           <label htmlFor="createdAt">{t("add_date")}</label>
           <DatePicker
             id="createdAt"
@@ -328,7 +366,9 @@ const AddArticle = ({ userId }) => {
           )}
         </div>
 
-        <div className={`form-field ${errors.image && isSubmitted ? "error" : ""}`}>
+        <div
+          className={`form-field ${errors.image && isSubmitted ? "error" : ""}`}
+        >
           <label htmlFor="image">{t("add_image")}</label>
           <div>
             <input
@@ -350,8 +390,21 @@ const AddArticle = ({ userId }) => {
           accept=".pdf"
           onChange={handlePdfFileChange}
         />
-
-        <button type="submit">{t("submit")}</button>
+        <button
+          type="submit"
+          disabled={isLoading}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {isLoading ? (
+            <BallTriangle type="TailSpin" color="#fff" height={20} width={20} />
+          ) : (
+            t("submit")
+          )}
+        </button>
       </form>
     </div>
   );
