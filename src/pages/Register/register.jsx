@@ -42,7 +42,7 @@ const Register = () => {
     if (!role) {
       errors.role = true;
     }
-    
+
     if (isAdmin && adminKey !== "S?cibodrepL$7SoG!th#") {
       errors.adminKey = true;
     }
@@ -73,6 +73,11 @@ const Register = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+
+          if (errorCode === "auth/email-already-in-use") {
+            alert(t("existing_email"));
+            setEmail("");
+          }
         });
     }
   };
@@ -126,9 +131,7 @@ const Register = () => {
           )}
           <div className="password-input-container">
             <input
-              className={`password-input ${
-                formErrors.password ? "error" : ""
-              }`}
+              className={`password-input ${formErrors.password ? "error" : ""}`}
               type={showPassword ? "text" : "password"}
               placeholder={t("login_password")}
               value={password}

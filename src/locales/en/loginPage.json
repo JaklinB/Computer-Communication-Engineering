@@ -36,6 +36,8 @@
   "required_role":"Role is required",
 
   "admin_key":"Admin key",
-  "admin_key_error":"Wrong admin key"
+  "admin_key_error":"Wrong admin key",
+
+  "existing_email":"User with the same email already exists!"
 
 }
