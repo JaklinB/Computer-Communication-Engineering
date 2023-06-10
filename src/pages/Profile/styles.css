@@ -1,83 +1,87 @@
-.form-field {
-  margin-bottom: 1rem;
+.profile-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-.error input[type="text"],
-.error textarea {
-  border: 1px solid red;
-}
-
-input{
-  width: 100%;
-}
-
-.error-message {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
-}
-
-.form-container {
-  margin: auto;
-  background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  transition: transform 0.3s ease-in-out;
-}
-
-.tags-input {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 4px;
-  min-height: 38px;
-  align-items: center;
-}
-
-.tags-input .tag {
-  display: flex;
-  align-items: center;
-  background-color: #f0f0f0;
-  border-radius: 4px;
-  padding: 4px 8px;
-  margin-right: 4px;
-  margin-bottom: 4px;
-  font-size: 0.9rem;
+.profile-page h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
   color: #333;
 }
 
-.tags-input .tag-close {
-  margin-left: 4px;
-  cursor: pointer;
+.profile-page p {
+  margin-bottom: 10px;
+  color: #666;
 }
 
-.tags-input input {
-  flex: 1;
+.profile-info {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+}
+
+.profile-info p {
+  font-weight: bold;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-actions button {
+  position: relative;
+  padding: 12px 24px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #5767aa;
   border: none;
-  outline: none;
-}
-
-.error .tags-input input {
-  border: 1px solid red;
-}
-
-.remove-button {
-  background: none;
-  border: none;
-  color: #29335c;
-  font-size: 12px;
-  padding: 0;
-  margin-left: 5px;
+  border-radius: 4px;
   cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 5px;
 }
 
-.remove-button:hover {
-  background: none;
-  border: none;
-  color: red;
-  font-size: 12px;
-  padding: 0;
-  margin-left: 5px;
-  cursor: pointer;
+.profile-actions button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.profile-actions button:hover::before {
+  opacity: 1;
+}
+
+.profile-actions button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.profile-actions .delete-profile-button {
+  background-color: #ff4545;
+}
+
+.profile-actions .logout-button {
+  background-color: #ffaa45;
 }

@@ -1,0 +1,12 @@
+{
+    "welcome":"Welcome",
+    "title":"What we know about you:",
+    "first_name": "First Name:",
+    "last_name": "Last Name:",
+    "email": "Email:",
+    "role":"Role:",
+    "read_later_page":"See what you have left to read later",
+    "delete_profile":"Delete Profile",
+    "logout":"Logout",
+    "delete_profile_warning":"Are you sure you want to delete your profile? This action cannot be undone."
+}

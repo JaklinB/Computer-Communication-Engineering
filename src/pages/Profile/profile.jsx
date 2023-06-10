@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import firebase from "firebase/compat/app";
+import { useTranslation } from "react-i18next";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
+import "./styles.css";
 
 const ProfilePage = () => {
+  const { t } = useTranslation("profile");
+
   const navigate = useNavigate();
   const auth = firebase.auth();
   const db = firebase.firestore();
@@ -59,7 +63,7 @@ const ProfilePage = () => {
   const handleDeleteProfile = async () => {
     if (
       window.confirm(
-        "Are you sure you want to delete your profile? This action cannot be undone."
+        t("delete_profile_warning")
       )
     ) {
       try {
@@ -80,20 +84,25 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <h1>Profile Page</h1>
-      {user && userData && <p>Welcome, {userData.firstName}!</p>}
+      {user && userData && <h1>{t("welcome")}, {userData.firstName}!</h1>}
+      <div className="profile-page">
       {userData && (
-        <div>
-          <p>First Name: {userData.firstName}</p>
-          <p>Last Name: {userData.lastName}</p>
-          <p>Email: {userData.email}</p>
-          <p>Role: {userData.role}</p>
+        <div className="profile-info">
+          <p>{t("title")}</p>
+          <p>{t("first_name")} {userData.firstName}</p>
+          <p>{t("last_name")} {userData.lastName}</p>
+          <p>{t("email")} {userData.email}</p>
+          <p>{t("role")} {userData.role}</p>
         </div>
       )}
-      <button onClick={handleGoToReadLater}>Go to Read Later</button>
-      <button onClick={handleDeleteProfile}>Delete Profile</button>
-      <button onClick={handleLogout}>Logout</button>
+      <div className="profile-actions">
+        <button onClick={handleGoToReadLater}>{t("read_later_page")}</button>
+        <button onClick={handleDeleteProfile}>{t("delete_profile")}</button>
+        <button onClick={handleLogout}>{t("logout")}</button>
+      </div>
     </div>
+    </div>
+    
   );
 };
 
