@@ -11,7 +11,7 @@ import "./styles.css";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
-const Blog = ({ isAdmin }) => {
+const Blog = ({ isAdmin, userId }) => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
@@ -85,16 +85,29 @@ const Blog = ({ isAdmin }) => {
       }
     }
 
+    async function checkIfLiked() {
+      try {
+        if (userId) {
+          const articleRef = firebase.firestore().collection("articles").doc(id);
+          const likeRef = articleRef.collection("likes").doc(userId);
+          const likeDoc = await likeRef.get();
+          setLiked(likeDoc.exists);
+        }
+      } catch (error) {
+        console.error("Error checking if liked:", error);
+      }
+    }
+
     getBlogFromDatabase();
     getImageUrlFromStorage();
     getPdfUrlFromStorage();
     getLikeCountFromDatabase();
-  }, [id]);
+    checkIfLiked();
+  }, [id, userId]);
 
   async function deleteArticle() {
     try {
-      const user = firebase.auth().currentUser;
-      if (user) {
+      if (userId) {
         const blogRef = firebase.firestore().collection("articles").doc(id);
         await blogRef.delete();
         navigate("/list");
@@ -107,10 +120,9 @@ const Blog = ({ isAdmin }) => {
 
   async function handleLike() {
     try {
-      const user = firebase.auth().currentUser;
-      if (user) {
+      if (userId) {
         const articleRef = firebase.firestore().collection("articles").doc(id);
-        const likeRef = articleRef.collection("likes").doc(user.uid);
+        const likeRef = articleRef.collection("likes").doc(userId);
 
         const likeDoc = await likeRef.get();
         if (likeDoc.exists) {
@@ -122,7 +134,7 @@ const Blog = ({ isAdmin }) => {
           setLikeCount(likeCount - 1);
         } else {
           await likeRef.set({
-            user_ref: user.uid,
+            user_ref: userId,
             article_ref: id,
           });
           await articleRef.update({

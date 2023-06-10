@@ -60,7 +60,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home isAdmin={isAdmin} />} />
         <Route path="/list" element={<MagazineList isAdmin={isAdmin}/>} />
-        <Route exact path="/articles/:id" element={<Blog isAdmin={isAdmin} />} />
+        <Route exact path="/articles/:id" element={<Blog isAdmin={isAdmin} userId={user ? user.uid : null}/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
