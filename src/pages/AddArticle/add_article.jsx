@@ -17,7 +17,8 @@ const AddArticle = ({ userId }) => {
   const [subcategories, setSubcategories] = useState([]);
   const [subcategoryInput, setSubcategoryInput] = useState("");
   const [description, setDescription] = useState("");
-  const [authorNames, setAuthorNames] = useState("");
+  const [authors, setAuthors] = useState([]); 
+  const [authorInput, setAuthorInput] = useState("");
   const [createdAt, setCreatedAt] = useState(new Date());
   const [volume, setVolume] = useState("");
   const [image, setImage] = useState(null);
@@ -41,8 +42,8 @@ const AddArticle = ({ userId }) => {
     setDescription(event.target.value);
   };
 
-  const handleAuthorNamesChange = (event) => {
-    setAuthorNames(event.target.value);
+  const handleAuthorInputChange = (event) => {
+    setAuthorInput(event.target.value);
   };
 
   const handleCreatedAtChange = (date) => {
@@ -79,6 +80,20 @@ const AddArticle = ({ userId }) => {
     );
   };
 
+  const handleAuthorInputKeyDown = (event) => {
+    if (event.key === "Enter" && authorInput.trim() !== "") {
+      event.preventDefault();
+      setAuthors((prevAuthors) => [...prevAuthors, authorInput.trim()]);
+      setAuthorInput("");
+    }
+  };
+
+  const handleRemoveAuthor = (index) => {
+    setAuthors((prevAuthors) =>
+      prevAuthors.filter((_, i) => i !== index)
+    );
+  };
+
   const validateForm = () => {
     const errors = {};
 
@@ -98,8 +113,8 @@ const AddArticle = ({ userId }) => {
       errors.description = t("add_description_empty");
     }
 
-    if (authorNames.trim() === "") {
-      errors.authorNames = t("add_authors_empty");
+    if (authors.length === 0) { 
+      errors.authors = t("add_authors_empty");
     }
 
     if (volume.trim() === "") {
@@ -135,7 +150,7 @@ const AddArticle = ({ userId }) => {
       category,
       subcategories,
       description,
-      authorNames,
+      authors, 
       createdAt,
       volume,
     };
@@ -177,7 +192,7 @@ const AddArticle = ({ userId }) => {
         setCategory("");
         setSubcategories([]);
         setDescription("");
-        setAuthorNames("");
+        setAuthors([]);
         setCreatedAt(new Date());
         setVolume("");
         setImage(null);
@@ -259,18 +274,33 @@ const AddArticle = ({ userId }) => {
           )}
         </div>
 
-        <div className={`form-field ${errors.authorNames && isSubmitted ? "error" : ""}`}>
-          <label htmlFor="authorNames">{t("add_authors")}</label>
+        <div className={`form-field ${errors.authors && isSubmitted ? "error" : ""}`}>
+        <label htmlFor="authors">{t("add_authors")}</label>
+        <div className="tags-input">
+          {authors.map((author, index) => (
+            <div className="tag" key={index}>
+              {author}
+              <button
+                type="button"
+                className="remove-button"
+                onClick={() => handleRemoveAuthor(index)}
+              >
+                &times;
+              </button>
+            </div>
+          ))}
           <input
             type="text"
-            id="authorNames"
-            value={authorNames}
-            onChange={handleAuthorNamesChange}
+            id="authors"
+            value={authorInput}
+            onChange={handleAuthorInputChange}
+            onKeyDown={handleAuthorInputKeyDown}
           />
-          {errors.authorNames && isSubmitted && (
-            <div className="error-message">{errors.authorNames}</div>
-          )}
         </div>
+        {errors.authors && isSubmitted && (
+          <div className="error-message">{errors.authors}</div>
+        )}
+      </div>
 
         <div className={`form-field ${errors.volume && isSubmitted ? "error" : ""}`}>
           <label htmlFor="volume">{t("add_volume")}</label>

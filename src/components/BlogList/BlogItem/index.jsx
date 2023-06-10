@@ -10,7 +10,7 @@ const BlogItem = ({
     description,
     title,
     createdAt,
-    authorNames,
+    authors,
     authorAvatar,
     cover,
     category,
@@ -74,7 +74,7 @@ const BlogItem = ({
             description,
             title,
             createdAt,
-            authorNames,
+            authors,
             authorAvatar,
             cover,
             category,
@@ -94,7 +94,11 @@ const BlogItem = ({
           <p className="blogItem-desc">{description}</p>
         </div>
         <footer>
-        <p className="authors">{authorNames}</p>
+          <div className="authors">
+            {Array.isArray(authors) && authors.length > 0 ? (
+              <p>{authors.join(", ")}</p>
+            ) : null}
+          </div>
           <div className="blogItem-footer">
             <p>{volume}</p>
             <p>{formattedDate}</p>
