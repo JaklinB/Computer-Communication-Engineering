@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Chip from "../../common/Chip";
+import { useTranslation } from "react-i18next";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import "./styles.css";
@@ -20,6 +21,8 @@ const BlogItem = ({
 }) => {
   const [imageUrl, setImageUrl] = useState(null);
   const [volume, setVolume] = useState(null);
+
+  const { t } = useTranslation("blog");
 
   const storage = firebase.storage();
   const created = {
@@ -67,7 +70,7 @@ const BlogItem = ({
   const handleArticleClick = (event) => {
     if (!isLoggedIn) {
       event.preventDefault();
-      alert("You need to log in to see the article.");
+      alert(t("login_to_read"));
     }
   };
 

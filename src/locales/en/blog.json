@@ -1,5 +1,6 @@
 {
     "read_article":"Read article",
     "delete_article":"Delete article",
-    "no_pdf_for_this_article":"This article cannot be accessed"
+    "no_pdf_for_this_article":"This article cannot be accessed",
+    "login_to_read":"You need to log in to see the article."
 }
