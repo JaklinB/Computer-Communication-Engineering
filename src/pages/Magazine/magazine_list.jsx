@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 
-const MagazineList = ({ isAdmin }) => {
+const MagazineList = ({ isAdmin, isLoggedIn }) => {
   const [blogs, setBlogs] = useState([]);
   const [searchKey, setSearchKey] = useState("");
 
@@ -54,7 +54,7 @@ const MagazineList = ({ isAdmin }) => {
         formSubmit={handleSearchBar}
         handleSearchKey={(e) => setSearchKey(e.target.value)}
       />
-      {!blogs.length ? <EmptyList /> : <BlogList blogs={blogs} />}
+      {!blogs.length ? <EmptyList /> : <BlogList blogs={blogs} isLoggedIn={isLoggedIn} />}
     </div>
   );
 };

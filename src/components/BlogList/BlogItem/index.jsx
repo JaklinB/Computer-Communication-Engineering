@@ -11,12 +11,12 @@ const BlogItem = ({
     title,
     createdAt,
     authors,
-    authorAvatar,
     cover,
     category,
     subCategories,
     id,
   },
+  isLoggedIn,
 }) => {
   const [imageUrl, setImageUrl] = useState(null);
   const [volume, setVolume] = useState(null);
@@ -64,6 +64,13 @@ const BlogItem = ({
     getVolumeFromFirebase();
   }, [cover, id]);
 
+  const handleArticleClick = (event) => {
+    if (!isLoggedIn) {
+      event.preventDefault();
+      alert("You need to log in to see the article.");
+    }
+  };
+
   return (
     <Link
       className="blogItem-link"
@@ -75,7 +82,6 @@ const BlogItem = ({
             title,
             createdAt,
             authors,
-            authorAvatar,
             cover,
             category,
             subCategories,
@@ -83,6 +89,7 @@ const BlogItem = ({
           },
         },
       }}
+      onClick={handleArticleClick}
     >
       <div className="blogItem-wrap">
         {imageUrl && (

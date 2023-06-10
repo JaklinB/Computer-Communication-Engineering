@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import BlogItem from "./BlogItem";
 import "./styles.css";
 
-const BlogList = ({ blogs }) => {
+const BlogList = ({ blogs, isLoggedIn }) => {
   const { t } = useTranslation("archivePage");
 
   const [sortOption, setSortOption] = useState("none");
@@ -37,7 +37,7 @@ const BlogList = ({ blogs }) => {
       </div>
       <div className="blogList-wrap">
         {sortBlogs(blogs).map((blog) => (
-          <BlogItem blog={blog} key={blog.id} />
+          <BlogItem blog={blog} key={blog.id} isLoggedIn={isLoggedIn}/>
         ))}
       </div>
     </div>
