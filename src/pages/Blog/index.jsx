@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Chip from "../../components/common/Chip";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
+import "firebase/compat/firestore"; 
 import PDFViewer from "../../components/pdfViewer/PDFViewer";
 import EmptyList from "../../components/common/EmptyList";
 import "./styles.css";
 
-const Blog = () => {
+const Blog = ({ isAdmin }) => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [pdfUrl, setPdfUrl] = useState(null);
   const [formattedDate, setFormattedDate] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getBlogFromDatabase() {
@@ -67,6 +70,22 @@ const Blog = () => {
     getPdfUrlFromStorage();
   }, [id]);
 
+
+  async function deleteArticle() {
+    try {
+      const user = firebase.auth().currentUser;
+      if (user) {
+        const blogRef = firebase.firestore().collection("articles").doc(id);
+        await blogRef.delete();
+        navigate("/list"); 
+      }
+    } catch (error) {
+      console.error("Error deleting article:", error);
+      throw error; 
+    }
+  }
+  
+
   return (
     <>
       {blog ? (
@@ -88,6 +107,9 @@ const Blog = () => {
             {blog.description.slice(1)}
           </p>
           {pdfUrl ? <PDFViewer pdfUrl={pdfUrl} /> : null}
+          {isAdmin && (
+          <button onClick={deleteArticle}>Delete Article</button>
+          )}
         </div>
       ) : (
         <EmptyList />
