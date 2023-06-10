@@ -3,10 +3,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import Chip from "../../components/common/Chip";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
-import "firebase/compat/firestore"; 
+import "firebase/compat/firestore";
 import PDFViewer from "../../components/pdfViewer/PDFViewer";
 import EmptyList from "../../components/common/EmptyList";
 import "./styles.css";
+
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 const Blog = ({ isAdmin }) => {
   const { id } = useParams();
@@ -14,6 +17,8 @@ const Blog = ({ isAdmin }) => {
   const [imageUrl, setImageUrl] = useState(null);
   const [pdfUrl, setPdfUrl] = useState(null);
   const [formattedDate, setFormattedDate] = useState(null);
+  const [likeCount, setLikeCount] = useState(0);
+  const [liked, setLiked] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,9 +37,9 @@ const Blog = ({ isAdmin }) => {
           const dateInSeconds = created.seconds;
           const createdAtDate = new Date(dateInSeconds * 1000);
           const formattedDate = createdAtDate.toLocaleDateString(undefined, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
+            year: "numeric",
+            month: "long",
+            day: "numeric",
           });
           setFormattedDate(formattedDate);
         }
@@ -65,11 +70,24 @@ const Blog = ({ isAdmin }) => {
       }
     }
 
+    async function getLikeCountFromDatabase() {
+      try {
+        const articleRef = firebase.firestore().collection("articles").doc(id);
+        const articleDoc = await articleRef.get();
+        if (articleDoc.exists) {
+          const articleData = articleDoc.data();
+          setLikeCount(articleData.likeCount || 0);
+        }
+      } catch (error) {
+        console.error("Error getting like count:", error);
+      }
+    }
+
     getBlogFromDatabase();
     getImageUrlFromStorage();
     getPdfUrlFromStorage();
+    getLikeCountFromDatabase();
   }, [id]);
-
 
   async function deleteArticle() {
     try {
@@ -77,14 +95,47 @@ const Blog = ({ isAdmin }) => {
       if (user) {
         const blogRef = firebase.firestore().collection("articles").doc(id);
         await blogRef.delete();
-        navigate("/list"); 
+        navigate("/list");
       }
     } catch (error) {
       console.error("Error deleting article:", error);
-      throw error; 
+      throw error;
     }
   }
-  
+
+  async function handleLike() {
+    try {
+      const user = firebase.auth().currentUser;
+      if (user) {
+        const articleRef = firebase.firestore().collection("articles").doc(id);
+        const likeRef = articleRef.collection("likes").doc(user.uid);
+
+        const likeDoc = await likeRef.get();
+        if (likeDoc.exists) {
+          // User has already liked the article, so unlike it
+          await likeRef.delete();
+          await articleRef.update({
+            likeCount: firebase.firestore.FieldValue.increment(-1),
+          });
+          setLiked(false);
+          setLikeCount(likeCount - 1);
+        } else {
+          // User has not liked the article, so like it
+          await likeRef.set({
+            user_ref: user.uid,
+            article_ref: id,
+          });
+          await articleRef.update({
+            likeCount: firebase.firestore.FieldValue.increment(1),
+          });
+          setLiked(true);
+          setLikeCount(likeCount + 1);
+        }
+      }
+    } catch (error) {
+      console.error("Error handling like:", error);
+    }
+  }
 
   return (
     <>
@@ -107,9 +158,19 @@ const Blog = ({ isAdmin }) => {
             {blog.description.slice(1)}
           </p>
           {pdfUrl ? <PDFViewer pdfUrl={pdfUrl} /> : null}
-          {isAdmin && (
-          <button onClick={deleteArticle}>Delete Article</button>
-          )}
+          {isAdmin && <button onClick={deleteArticle}>Delete Article</button>}
+          <div className="like-section">
+            <button onClick={handleLike} className="icon-button">
+              {liked ? (
+                <FavoriteIcon color="secondary" />
+              ) : (
+                <FavoriteBorderIcon />
+              )}
+            </button>
+            <span className="like-count">
+              {likeCount} Like{likeCount !== 1 && "s"}
+            </span>
+          </div>
         </div>
       ) : (
         <EmptyList />
