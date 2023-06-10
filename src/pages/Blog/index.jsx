@@ -145,11 +145,12 @@ const Blog = ({ isAdmin }) => {
             <p className="blog-date">{formattedDate}</p>
             <h1>{blog.title}</h1>
             <div className="blog-subCategory">
-              {blog.subcategories.split(",").map((category, i) => (
-                <div key={i}>
-                  <Chip label={category.trim()} />
-                </div>
-              ))}
+              {Array.isArray(blog.subcategories) &&
+                blog.subcategories.map((category, i) => (
+                  <div key={i}>
+                    <Chip label={category.trim()} />
+                  </div>
+                ))}
             </div>
           </header>
           {imageUrl && <img src={imageUrl} alt="cover" />}

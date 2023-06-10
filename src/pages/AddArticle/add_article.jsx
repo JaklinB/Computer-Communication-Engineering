@@ -14,7 +14,8 @@ const AddArticle = ({ userId }) => {
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [subcategories, setSubcategories] = useState("");
+  const [subcategories, setSubcategories] = useState([]);
+  const [subcategoryInput, setSubcategoryInput] = useState("");
   const [description, setDescription] = useState("");
   const [authorNames, setAuthorNames] = useState("");
   const [createdAt, setCreatedAt] = useState(new Date());
@@ -22,6 +23,7 @@ const AddArticle = ({ userId }) => {
   const [image, setImage] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
   const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -32,7 +34,7 @@ const AddArticle = ({ userId }) => {
   };
 
   const handleSubcategoriesChange = (event) => {
-    setSubcategories(event.target.value);
+    setSubcategoryInput(event.target.value);
   };
 
   const handleDescriptionChange = (event) => {
@@ -59,6 +61,24 @@ const AddArticle = ({ userId }) => {
     setPdfFile(event.target.files[0]);
   };
 
+  const handleSubcategoryInputChange = (event) => {
+    setSubcategoryInput(event.target.value);
+  };
+
+  const handleSubcategoryInputKeyDown = (event) => {
+    if (event.key === "Enter" && subcategoryInput.trim() !== "") {
+      event.preventDefault();
+      setSubcategories((prevSubcategories) => [...prevSubcategories, subcategoryInput.trim()]);
+      setSubcategoryInput("");
+    }
+  };
+
+  const handleRemoveSubcategory = (index) => {
+    setSubcategories((prevSubcategories) =>
+      prevSubcategories.filter((_, i) => i !== index)
+    );
+  };
+
   const validateForm = () => {
     const errors = {};
 
@@ -70,7 +90,7 @@ const AddArticle = ({ userId }) => {
       errors.category = t("add_category_empty");
     }
 
-    if (subcategories.trim() === "") {
+    if (subcategories.length === 0) {
       errors.subcategories = t("add_subcategories_empty");
     }
 
@@ -101,6 +121,8 @@ const AddArticle = ({ userId }) => {
     if (!validateForm()) {
       return;
     }
+
+    setIsSubmitted(true);
 
     const storage = firebase.storage();
     const storageRef = storage.ref();
@@ -153,7 +175,7 @@ const AddArticle = ({ userId }) => {
 
         setTitle("");
         setCategory("");
-        setSubcategories("");
+        setSubcategories([]);
         setDescription("");
         setAuthorNames("");
         setCreatedAt(new Date());
@@ -172,7 +194,7 @@ const AddArticle = ({ userId }) => {
     <div className="form-container">
       <h1>{t("add_article")}</h1>
       <form onSubmit={handleFormSubmit}>
-        <div className={`form-field ${errors.title ? "error" : ""}`}>
+        <div className={`form-field ${errors.title && isSubmitted ? "error" : ""}`}>
           <label htmlFor="title">{t("add_title")}</label>
           <input
             type="text"
@@ -180,10 +202,10 @@ const AddArticle = ({ userId }) => {
             value={title}
             onChange={handleTitleChange}
           />
-          {errors.title && <div className="error-message">{errors.title}</div>}
+          {errors.title && isSubmitted && <div className="error-message">{errors.title}</div>}
         </div>
 
-        <div className={`form-field ${errors.category ? "error" : ""}`}>
+        <div className={`form-field ${errors.category && isSubmitted ? "error" : ""}`}>
           <label htmlFor="category">{t("add_category")}</label>
           <input
             type="text"
@@ -191,25 +213,40 @@ const AddArticle = ({ userId }) => {
             value={category}
             onChange={handleCategoryChange}
           />
-          {errors.category && (
+          {errors.category && isSubmitted && (
             <div className="error-message">{errors.category}</div>
           )}
         </div>
 
-        <div className={`form-field ${errors.subcategories ? "error" : ""}`}>
+        <div className={`form-field ${errors.subcategories && isSubmitted ? "error" : ""}`}>
           <label htmlFor="subcategories">{t("add_subcategories")}</label>
-          <input
-            type="text"
-            id="subcategories"
-            value={subcategories}
-            onChange={handleSubcategoriesChange}
-          />
-          {errors.subcategories && (
+          <div className="tags-input">
+            {subcategories.map((subcategory, index) => (
+              <div className="tag" key={index}>
+                {subcategory}
+                <button
+                  type="button"
+                  className="remove-button"
+                  onClick={() => handleRemoveSubcategory(index)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
+            <input
+              type="text"
+              id="subcategories"
+              value={subcategoryInput}
+              onChange={handleSubcategoryInputChange}
+              onKeyDown={handleSubcategoryInputKeyDown}
+            />
+          </div>
+          {errors.subcategories && isSubmitted && (
             <div className="error-message">{errors.subcategories}</div>
           )}
         </div>
 
-        <div className={`form-field ${errors.description ? "error" : ""}`}>
+        <div className={`form-field ${errors.description && isSubmitted ? "error" : ""}`}>
           <label htmlFor="description">{t("add_description")}</label>
           <input
             type="text"
@@ -217,12 +254,12 @@ const AddArticle = ({ userId }) => {
             value={description}
             onChange={handleDescriptionChange}
           />
-          {errors.description && (
+          {errors.description && isSubmitted && (
             <div className="error-message">{errors.description}</div>
           )}
         </div>
 
-        <div className={`form-field ${errors.authorNames ? "error" : ""}`}>
+        <div className={`form-field ${errors.authorNames && isSubmitted ? "error" : ""}`}>
           <label htmlFor="authorNames">{t("add_authors")}</label>
           <input
             type="text"
@@ -230,12 +267,12 @@ const AddArticle = ({ userId }) => {
             value={authorNames}
             onChange={handleAuthorNamesChange}
           />
-          {errors.authorNames && (
+          {errors.authorNames && isSubmitted && (
             <div className="error-message">{errors.authorNames}</div>
           )}
         </div>
 
-        <div className={`form-field ${errors.volume ? "error" : ""}`}>
+        <div className={`form-field ${errors.volume && isSubmitted ? "error" : ""}`}>
           <label htmlFor="volume">{t("add_volume")}</label>
           <input
             type="text"
@@ -243,24 +280,24 @@ const AddArticle = ({ userId }) => {
             value={volume}
             onChange={handleVolumeChange}
           />
-          {errors.volume && (
+          {errors.volume && isSubmitted && (
             <div className="error-message">{errors.volume}</div>
           )}
         </div>
 
-        <div className={`form-field ${errors.createdAt ? "error" : ""}`}>
+        <div className={`form-field ${errors.createdAt && isSubmitted ? "error" : ""}`}>
           <label htmlFor="createdAt">{t("add_date")}</label>
           <DatePicker
             id="createdAt"
             selected={createdAt}
             onChange={handleCreatedAtChange}
           />
-          {errors.createdAt && (
+          {errors.createdAt && isSubmitted && (
             <div className="error-message">{errors.createdAt}</div>
           )}
         </div>
 
-        <div className={`form-field ${errors.image ? "error" : ""}`}>
+        <div className={`form-field ${errors.image && isSubmitted ? "error" : ""}`}>
           <label htmlFor="image">{t("add_image")}</label>
           <div>
             <input
@@ -269,7 +306,7 @@ const AddArticle = ({ userId }) => {
               accept=".png,.jpeg,.jpg"
               onChange={handleImageFileChange}
             />
-            {errors.image && (
+            {errors.image && isSubmitted && (
               <div className="error-message">{errors.image}</div>
             )}
           </div>
