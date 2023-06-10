@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { auth, firestore } from "firebase/compat/app";
+import { useNavigate, Link } from "react-router-dom";
 import firebase from "../../config/firebase";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 import "./styles.css";
 
 const Register = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation("loginPage");
 
   const [firstName, setFirstName] = useState("");
@@ -48,13 +48,21 @@ const Register = () => {
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          db.collection("users").doc(user.uid).set({
-            firstName,
-            lastName,
-            email,
-            role,
-            isAdmin,
-          });
+          db.collection("users")
+            .doc(user.uid)
+            .set({
+              firstName,
+              lastName,
+              email,
+              role,
+              isAdmin,
+            })
+            .then(() => {
+              navigate("/");
+            })
+            .catch((error) => {
+              console.log("Error saving user data:", error);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -108,7 +116,9 @@ const Register = () => {
           )}
           <div className="password-input-container">
             <input
-              className={`password-input ${formErrors.password ? "error" : ""}`}
+              className={`password-input ${
+                formErrors.password ? "error" : ""
+              }`}
               type={showPassword ? "text" : "password"}
               placeholder={t("login_password")}
               value={password}

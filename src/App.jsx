@@ -12,6 +12,7 @@ import SubmitPaper from "./pages/SubmitPaper/submit_paper";
 import Journal from "./pages/Journal/journal";
 import PublicationFees from "./pages/PublicationFees/publication_fees";
 import AddArticle from "./pages/AddArticle/add_article";
+import ProfilePage from "./pages/Profile/profile";
 import "./App.css";
 import "firebase/auth";
 import "firebase/firestore";
@@ -74,6 +75,7 @@ const App = () => {
         <Route path="/journal" element={<Journal />} />
         <Route path="/submit-paper" element={<SubmitPaper />} />
         <Route path="/publication-fee" element={<PublicationFees />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/add-article" element={<AddArticle userId={user ? user.uid : null} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

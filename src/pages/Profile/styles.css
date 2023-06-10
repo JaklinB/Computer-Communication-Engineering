@@ -1,0 +1,83 @@
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.error input[type="text"],
+.error textarea {
+  border: 1px solid red;
+}
+
+input{
+  width: 100%;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.form-container {
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  transition: transform 0.3s ease-in-out;
+}
+
+.tags-input {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px;
+  min-height: 38px;
+  align-items: center;
+}
+
+.tags-input .tag {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.tags-input .tag-close {
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.tags-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+}
+
+.error .tags-input input {
+  border: 1px solid red;
+}
+
+.remove-button {
+  background: none;
+  border: none;
+  color: #29335c;
+  font-size: 12px;
+  padding: 0;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 12px;
+  padding: 0;
+  margin-left: 5px;
+  cursor: pointer;
+}

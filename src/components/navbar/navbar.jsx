@@ -3,6 +3,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import LanguageSwitcher from "../LanguageSwitcher/languageSwitcher";
 import { useTranslation } from "react-i18next";
 import { getAuth } from "firebase/auth";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 function Navbar() {
@@ -60,9 +61,7 @@ function Navbar() {
           <a href="/list">{t("archive_page")}</a>
           <a href="/submit-paper">{t("submit_paper_page")}</a>
           {isLoggedIn ? (
-            <button className="logout-btn" onClick={handleLogout}>
-              {t("logout")}
-            </button>
+            <a href="/profile">{t("profile")}</a>
           ) : (
             <a href="/login">{t("login_page")}</a>
           )}
