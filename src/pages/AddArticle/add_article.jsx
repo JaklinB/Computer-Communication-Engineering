@@ -126,6 +126,7 @@ const AddArticle = ({ userId }) => {
     }
 
     setErrors(errors);
+    setIsSubmitted(true);
 
     return Object.keys(errors).length === 0;
   };
