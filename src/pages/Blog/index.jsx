@@ -6,12 +6,15 @@ import "firebase/compat/storage";
 import "firebase/compat/firestore";
 import PDFViewer from "../../components/pdfViewer/PDFViewer";
 import EmptyList from "../../components/common/EmptyList";
+import { useTranslation } from "react-i18next";
 import "./styles.css";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 const Blog = ({ isAdmin, userId }) => {
+  const { t } = useTranslation("blog");
+
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
@@ -190,9 +193,9 @@ const Blog = ({ isAdmin, userId }) => {
           {pdfUrl ? (
             <PDFViewer pdfUrl={pdfUrl} />
           ) : pdfError ? (
-            <p>No PDF file found for this article.</p>
+            <p>{t("no_pdf_for_this_article")}</p>
           ) : null}
-          {isAdmin && <button onClick={deleteArticle}>Delete Article</button>}
+          {isAdmin && <button onClick={deleteArticle}>{t("delete_article")}</button>}
         </div>
       ) : (
         <EmptyList />
