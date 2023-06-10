@@ -142,6 +142,31 @@ html
   -webkit-text-stroke: 0.1px #29335c;
 }
 
+.helpful-links {
+  margin-top: 20px;
+}
+
+.helpful-links h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #29335c;
+}
+
+.helpful-links p {
+  margin: 10px 0;
+}
+
+.helpful-links a {
+  color: #5767aa;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.helpful-links a:hover {
+  color: #29335c;
+}
+
+
 @media (max-width: 768px) {
   .about-us-content {
     flex-direction: column;

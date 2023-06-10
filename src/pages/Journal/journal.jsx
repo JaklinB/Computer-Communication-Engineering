@@ -16,6 +16,24 @@ const Journal = () => {
     window.open(googleMapsUrl, "_blank");
   };
 
+  const openInstructions = (event) => {
+    event.preventDefault();
+    const filePath = "/assets/Instructions_CE_2018.pdf";
+    window.open(filePath, "_blank");
+  };
+
+  const openPeerReviewPolicy = (event) => {
+    event.preventDefault();
+    const filePath = "/assets/PEER_REVIEW_POLICY_EN.pdf";
+    window.open(filePath, "_blank");
+  };
+
+  const openPublicationEthics = (event) => {
+    event.preventDefault();
+    const filePath = "/assets/PUBLICATION_ETHICS_EN.pdf";
+    window.open(filePath, "_blank");
+  };
+
   return (
     <div className="about-us">
       <div className="about-us-content">
@@ -52,46 +70,57 @@ const Journal = () => {
       <br />
 
       <div id="ct">
-        <div class="corner " id="left_top"></div>
-        <div class="corner" id="left_bottom"></div>
-        <div class="corner" id="right_top"></div>
-        <div class="corner" id="right_bottom"></div>
+        <div className="corner " id="left_top"></div>
+        <div className="corner" id="left_bottom"></div>
+        <div className="corner" id="right_top"></div>
+        <div className="corner" id="right_bottom"></div>
         <blockquote>
           <p className="more-description">{t("detailed_description_p1")}</p>
         </blockquote>
       </div>
 
       <div id="ct">
-        <div class="corner " id="left_top"></div>
-        <div class="corner" id="left_bottom"></div>
-        <div class="corner" id="right_top"></div>
-        <div class="corner" id="right_bottom"></div>
+        <div className="corner " id="left_top"></div>
+        <div className="corner" id="left_bottom"></div>
+        <div className="corner" id="right_top"></div>
+        <div className="corner" id="right_bottom"></div>
         <blockquote>
           <p className="more-description">{t("detailed_description_p2")}</p>
         </blockquote>
       </div>
 
       <div id="ct">
-        <div class="corner " id="left_top"></div>
-        <div class="corner" id="left_bottom"></div>
-        <div class="corner" id="right_top"></div>
-        <div class="corner" id="right_bottom"></div>
+        <div className="corner " id="left_top"></div>
+        <div className="corner" id="left_bottom"></div>
+        <div className="corner" id="right_top"></div>
+        <div className="corner" id="right_bottom"></div>
         <blockquote>
           <p className="more-description">{t("detailed_description_p3")}</p>
         </blockquote>
       </div>
 
-
       <div id="ct">
-        <div class="corner " id="left_top"></div>
-        <div class="corner" id="left_bottom"></div>
-        <div class="corner" id="right_top"></div>
-        <div class="corner" id="right_bottom"></div>
+        <div className="corner " id="left_top"></div>
+        <div className="corner" id="left_bottom"></div>
+        <div className="corner" id="right_top"></div>
+        <div className="corner" id="right_bottom"></div>
         <blockquote>
           <p className="more-description">{t("detailed_description_p4")}</p>
         </blockquote>
       </div>
-
+      <div className="helpful-links">
+        <h2>{t("helpful_links")}</h2>
+        <p>
+          <a onClick={openInstructions}>{t("instructions")}</a>
+          {t("instructions_rest")}
+        </p>
+        <p>
+          <a onClick={openPeerReviewPolicy}>{t("peer_review_policy")}</a>
+        </p>
+        <p>
+          <a onClick={openPublicationEthics}>{t("publication_ethics")}</a>
+        </p>
+      </div>
     </div>
   );
 };
