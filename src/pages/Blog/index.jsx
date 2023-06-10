@@ -19,6 +19,7 @@ const Blog = ({ isAdmin }) => {
   const [formattedDate, setFormattedDate] = useState(null);
   const [likeCount, setLikeCount] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [pdfError, setPdfError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -66,7 +67,8 @@ const Blog = ({ isAdmin }) => {
         const pdfUrl = await pdfRef.getDownloadURL();
         setPdfUrl(pdfUrl);
       } catch (error) {
-        console.error("Error getting PDF URL:", error);
+        setPdfUrl(null);
+        setPdfError(true); 
       }
     }
 
@@ -112,7 +114,6 @@ const Blog = ({ isAdmin }) => {
 
         const likeDoc = await likeRef.get();
         if (likeDoc.exists) {
-          // User has already liked the article, so unlike it
           await likeRef.delete();
           await articleRef.update({
             likeCount: firebase.firestore.FieldValue.increment(-1),
@@ -120,7 +121,6 @@ const Blog = ({ isAdmin }) => {
           setLiked(false);
           setLikeCount(likeCount - 1);
         } else {
-          // User has not liked the article, so like it
           await likeRef.set({
             user_ref: user.uid,
             article_ref: id,
@@ -158,7 +158,11 @@ const Blog = ({ isAdmin }) => {
             <span className="first-letter">{blog.description.charAt(0)}</span>
             {blog.description.slice(1)}
           </p>
-          {pdfUrl ? <PDFViewer pdfUrl={pdfUrl} /> : null}
+          {pdfUrl ? (
+            <PDFViewer pdfUrl={pdfUrl} />
+          ) : pdfError ? (
+            <p>No PDF file found for this article.</p> 
+          ) : null}
           {isAdmin && <button onClick={deleteArticle}>Delete Article</button>}
           <div className="like-section">
             <button onClick={handleLike} className="icon-button">
