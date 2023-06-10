@@ -8,7 +8,7 @@ import PDFViewer from "../../components/pdfViewer/PDFViewer";
 import EmptyList from "../../components/common/EmptyList";
 import { useTranslation } from "react-i18next";
 import "./styles.css";
-
+import { AiFillDelete } from "react-icons/ai";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
@@ -180,11 +180,11 @@ const Blog = ({ isAdmin, userId }) => {
       if (userId) {
         const userRef = firebase.firestore().collection("users").doc(userId);
         const userDoc = await userRef.get();
-  
+
         if (userDoc.exists) {
           const userData = userDoc.data();
           const readLaterArticleIds = userData.readLater || [];
-  
+
           if (readLaterArticleIds.includes(id)) {
             await userRef.update({
               readLater: firebase.firestore.FieldValue.arrayRemove(id),
@@ -202,7 +202,6 @@ const Blog = ({ isAdmin, userId }) => {
       console.error("Error handling read later:", error);
     }
   }
-  
 
   return (
     <>
@@ -258,7 +257,12 @@ const Blog = ({ isAdmin, userId }) => {
             <p>{t("no_pdf_for_this_article")}</p>
           ) : null}
           {isAdmin && (
-            <button onClick={deleteArticle}>{t("delete_article")}</button>
+            <button className="delete-button" onClick={deleteArticle}>
+              <span className="delete-icon">
+                <AiFillDelete />
+              </span>
+              {t("delete_article")}
+            </button>
           )}
         </div>
       ) : (

@@ -73,3 +73,41 @@
   display: flex;
   justify-content: space-between;
 }
+
+.delete-button {
+  position: relative;
+  color: #fff;
+  background-color: #29335c;
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.delete-button:before {
+  height: 0%;
+  width: 2px;
+}
+
+.delete-button:hover {
+  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+    -4px -4px 6px 0 rgba(116, 125, 136, 0.5),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+}
+
+.delete-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.delete-icon > svg {
+  width: 25px;
+  height: 25px;
+  fill: #fff;
+}
+
+.delete-button:hover .delete-icon > svg {
+  fill: #ff0000;
+}

@@ -1,3 +1,7 @@
+.download-button{
+  margin-bottom: 2%;
+}
+
 .download-button:before {
   height: 0%;
   width: 2px;
