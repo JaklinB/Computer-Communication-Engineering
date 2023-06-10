@@ -33,6 +33,9 @@
   "required_last_name":"Last name is required",
   "required_email":"Email is required",
   "required_password":"Password is required",
-  "required_role":"Role is required"
+  "required_role":"Role is required",
+
+  "admin_key":"Admin key",
+  "admin_key_error":"Wrong admin key"
 
 }

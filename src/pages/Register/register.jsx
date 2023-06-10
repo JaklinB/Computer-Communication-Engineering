@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import firebase from "../../config/firebase";
 import { useTranslation } from "react-i18next";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
+import { AiFillDelete } from "react-icons/ai";
 import "./styles.css";
 
 const Register = () => {
@@ -16,6 +17,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [adminKey, setAdminKey] = useState("");
   const [formErrors, setFormErrors] = useState({});
 
   const handleRegister = (e) => {
@@ -39,6 +41,10 @@ const Register = () => {
     }
     if (!role) {
       errors.role = true;
+    }
+    
+    if (isAdmin && adminKey !== "S?cibodrepL$7SoG!th#") {
+      errors.adminKey = true;
     }
 
     setFormErrors(errors);
@@ -77,6 +83,10 @@ const Register = () => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+
+  const handleAdminKeyChange = (e) => {
+    setAdminKey(e.target.value);
   };
 
   return (
@@ -156,6 +166,20 @@ const Register = () => {
               onChange={(e) => setIsAdmin(e.target.checked)}
             />
           </label>
+          {isAdmin && (
+            <div className="admin-key-container">
+              <input
+                type="password"
+                placeholder={t("admin_key")}
+                value={adminKey}
+                onChange={handleAdminKeyChange}
+                className={formErrors.adminKey ? "error" : ""}
+              />
+              {formErrors.adminKey && (
+                <p className="error-message">{t("admin_key_error")}</p>
+              )}
+            </div>
+          )}
           <button type="submit">{t("register_submit")}</button>
         </form>
         <p>

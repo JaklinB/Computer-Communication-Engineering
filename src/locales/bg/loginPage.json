@@ -33,6 +33,9 @@
   "required_last_name":"Въведете фамилия",
   "required_email":"Въведете Email",
   "required_password":"Въведете парола",
-  "required_role":"Изберете роля"
+  "required_role":"Изберете роля",
+
+  "admin_key":"Администраторски ключ",
+  "admin_key_error":"Грешен администраторски ключ"
 
 }
