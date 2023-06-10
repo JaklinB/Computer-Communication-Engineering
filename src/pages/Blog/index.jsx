@@ -68,7 +68,7 @@ const Blog = ({ isAdmin }) => {
         setPdfUrl(pdfUrl);
       } catch (error) {
         setPdfUrl(null);
-        setPdfError(true); 
+        setPdfError(true);
       }
     }
 
@@ -142,28 +142,14 @@ const Blog = ({ isAdmin }) => {
       {blog ? (
         <div className="blog-wrap">
           <header>
-            <p className="blog-date">{formattedDate}</p>
             <h1>{blog.title}</h1>
-            <div className="blog-subCategory">
-              {Array.isArray(blog.subcategories) &&
-                blog.subcategories.map((category, i) => (
-                  <div key={i}>
-                    <Chip label={category.trim()} />
-                  </div>
-                ))}
+            <p className="blog-date">{formattedDate}</p>
+            <div className="authors">
+              {Array.isArray(blog.authors) && blog.authors.length > 0 ? (
+                <p className="author">{blog.authors.join(", ")}</p>
+              ) : null}
             </div>
           </header>
-          {imageUrl && <img src={imageUrl} alt="cover" />}
-          <p className="blog-desc">
-            <span className="first-letter">{blog.description.charAt(0)}</span>
-            {blog.description.slice(1)}
-          </p>
-          {pdfUrl ? (
-            <PDFViewer pdfUrl={pdfUrl} />
-          ) : pdfError ? (
-            <p>No PDF file found for this article.</p> 
-          ) : null}
-          {isAdmin && <button onClick={deleteArticle}>Delete Article</button>}
           <div className="like-section">
             <button onClick={handleLike} className="icon-button">
               {liked ? (
@@ -176,6 +162,25 @@ const Blog = ({ isAdmin }) => {
               {likeCount} Like{likeCount !== 1 && "s"}
             </span>
           </div>
+          {imageUrl && <img src={imageUrl} alt="cover" />}
+          <div className="blog-subCategory">
+            {Array.isArray(blog.subcategories) &&
+              blog.subcategories.map((category, i) => (
+                <div key={i} className="category-chip">
+                  <Chip label={category.trim()} />
+                </div>
+              ))}
+          </div>
+          <p className="blog-desc">
+            <span className="first-letter">{blog.description.charAt(0)}</span>
+            {blog.description.slice(1)}
+          </p>
+          {pdfUrl ? (
+            <PDFViewer pdfUrl={pdfUrl} />
+          ) : pdfError ? (
+            <p>No PDF file found for this article.</p>
+          ) : null}
+          {isAdmin && <button onClick={deleteArticle}>Delete Article</button>}
         </div>
       ) : (
         <EmptyList />

@@ -10,6 +10,12 @@
 .blog-date {
   font-size: 0.8rem;
   color: #a9a9a9;
+  font-weight: 600;
+}
+
+.author{
+  font-size: 0.7rem;
+  color: #a9a9a9;
   font-weight: 500;
 }
 
@@ -19,15 +25,18 @@
 
 .blog-subCategory {
   display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
-.blog-subCategory > div {
-  margin-right: 1rem;
-  margin-top: 0.5rem;
+
+.category-chip {
+  margin-right: 2%;
 }
 
 .blog-desc {
-  padding: 1rem;
-  margin-top: 20px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .first-letter {
@@ -41,7 +50,7 @@
 }
 
 .like-count {
-  margin-left: 5px; 
+  margin-left: 5px;
 }
 
 .icon-button {
