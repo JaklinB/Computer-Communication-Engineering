@@ -208,7 +208,7 @@ const Blog = ({ isAdmin, userId }) => {
       {blog ? (
         <div className="blog-wrap">
           <header>
-            <h1>{blog.title}</h1>
+            <h1 className="blog-title">{blog.title}</h1>
           </header>
           <div className="user-opinion">
             <div className="like-section">

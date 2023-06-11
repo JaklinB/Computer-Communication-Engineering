@@ -111,3 +111,35 @@
 .delete-button:hover .delete-icon > svg {
   fill: #ff0000;
 }
+
+.blog-title {
+  font-size: 27px;
+  font-weight: bold;
+  color: #29335c;
+  letter-spacing: 1px;
+}
+
+h1.blog-title:before,
+h1.blog-title:after {
+  content: "[";
+  display: inline-block;
+  position: relative;
+  top: 1px;
+  height: 100%;
+  font-size: 1.25em;
+  color: red;
+  transition: all 0.5s ease;
+  padding: 2%;
+}
+
+h1.blog-title:after {
+  content: "]";
+}
+
+h1.blog-title:hover:before {
+  transform: translateX(-5px);
+}
+
+h1.blog-title:hover:after {
+  transform: translateX(5px);
+}
