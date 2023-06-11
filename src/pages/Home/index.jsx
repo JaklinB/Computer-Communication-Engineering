@@ -28,13 +28,17 @@ const Home = ({ isLoggedIn }) => {
     fetchArticles();
   }, []);
 
-  const newestBlogs = blogs.slice(0, 3);
-
   useEffect(() => {
-    const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes);
-    const mostLiked = sortedBlogs.slice(0, 3);
-    setMostLikedBlogs(mostLiked);
+    const updateMostLikedBlogs = () => {
+      const sortedBlogs = [...blogs].sort((a, b) => b.likeCount - a.likeCount);
+      const mostLiked = sortedBlogs.slice(0, 3);
+      setMostLikedBlogs(mostLiked);
+    };
+
+    updateMostLikedBlogs();
   }, [blogs]);
+
+  const newestBlogs = blogs.slice(0, 3);
 
   return (
     <div>
@@ -51,7 +55,7 @@ const Home = ({ isLoggedIn }) => {
       </div>
       <h1 className="blogList-title">{t('most_liked_articles')}:</h1>
       <div className="blogList-wrap-home">
-        {!blogs.length ? (
+        {!mostLikedBlogs.length ? (
           <EmptyList />
         ) : (
           mostLikedBlogs.map((blog) => (
