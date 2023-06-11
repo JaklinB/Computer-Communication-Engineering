@@ -70,43 +70,17 @@ function SubmitPaper() {
         <a onClick={openFormattingGuidelines}>{t("submit_paper_formatting")}</a>
       </p>
       <br />
-      <form
-        className="form-container"
-        action="c75762497807b4a97190031493d5a2e8"
-        method="POST"
-        encType="multipart/form-data"
-        onSubmit={handleSubmit}
-      >
-        <input
-          placeholder={t("submit_paper_form_name")}
-          type="text"
-          name="name"
-        />
-        {formErrors.name && (
-          <p className="error-message">{formErrors.name}</p>
-        )}
-
-        <input
-          placeholder={t("submit_paper_form_email")}
-          type="email"
-          name="email"
-        />
-        {formErrors.email && (
-          <p className="error-message">{formErrors.email}</p>
-        )}
-
-        <input
-          placeholder={t("submit_paper_form_file")}
-          type="file"
-          name="file"
-        />
-        {formErrors.file && (
-          <p className="error-message">{formErrors.file}</p>
-        )}
-
-        <button type="submit">{t("submit_paper_submit")}</button>
-      </form>
-      <br />
+      <div className="envelope-wrap">
+         <div id="envelope">
+        <div id="lid"></div>
+        <div id="letter">
+          <h4 className="email-text">computer_engineering@tu-sofia.bg</h4>
+        </div>
+        <div id="left-corner"></div>
+        <div id="right-corner"></div>
+      </div>
+      </div>
+     
     </div>
   );
 }
