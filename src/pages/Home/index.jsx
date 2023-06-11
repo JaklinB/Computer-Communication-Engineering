@@ -40,7 +40,7 @@ const Home = ({ isLoggedIn }) => {
     <div>
       <Header />
       <h1 className="blogList-title">{t('newest_articles')}:</h1>
-      <div className="blogList-wrap">
+      <div className="blogList-wrap-home">
         {!blogs.length ? (
           <EmptyList />
         ) : (
@@ -50,7 +50,7 @@ const Home = ({ isLoggedIn }) => {
         )}
       </div>
       <h1 className="blogList-title">{t('most_liked_articles')}:</h1>
-      <div className="blogList-wrap">
+      <div className="blogList-wrap-home">
         {!blogs.length ? (
           <EmptyList />
         ) : (
