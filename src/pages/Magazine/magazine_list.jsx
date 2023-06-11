@@ -36,7 +36,10 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
 
   const handleSearchResults = () => {
     const filteredBlogs = blogs.filter((blog) =>
-      blog.category.toLowerCase().includes(searchKey.toLowerCase().trim())
+      blog.category.toLowerCase().includes(searchKey.toLowerCase().trim()) ||
+      blog.subcategories.some(subcategory =>
+        subcategory.toLowerCase().includes(searchKey.toLowerCase().trim())
+      )
     );
     setBlogs(filteredBlogs);
   };
