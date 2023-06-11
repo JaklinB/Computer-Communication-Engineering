@@ -12,43 +12,44 @@ const element = document.getElementById("root");
 const root = ReactDOM.createRoot(element);
 
 const Magazine = () => {
- // Define the translation files to load
-const translationFiles = require.context('./locales', true, /\.json$/);
+  const translationFiles = require.context('./locales', true, /\.json$/);
 
-// Load the translations dynamically
-const resources = {};
+  const resources = {};
 
-translationFiles.keys().forEach((filename) => {
-  const fileContents = translationFiles(filename);
-  const match = filename.match(/([a-z]{2})\/([a-z]+)\.json$/i);
-  if (match && match.length === 3) {
-    const lang = match[1];
-    const namespace = match[2];
-    resources[lang] = resources[lang] || {};
-    resources[lang][namespace] = fileContents;
-  }
-});
-
-// Initialize i18next
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: 'en',
-    fallbackLng: 'en',
-    ns: ['common', 'home'], // Specify the namespaces to use
-    defaultNS: 'common', // Specify the default namespace
-    interpolation: {
-      escapeValue: false, // React already escapes variables
-    },
+  translationFiles.keys().forEach((filename) => {
+    const fileContents = translationFiles(filename);
+    const match = filename.match(/([a-z]{2})\/([a-z]+)\.json$/i);
+    if (match && match.length === 3) {
+      const lang = match[1];
+      const namespace = match[2];
+      resources[lang] = resources[lang] || {};
+      resources[lang][namespace] = fileContents;
+    }
   });
+
+  // Initialize i18next
+  i18n
+    .use(initReactI18next)
+    .init({
+      resources,
+      lng: 'en',
+      fallbackLng: 'en',
+      ns: ['common', 'home'], 
+      defaultNS: 'common', 
+      interpolation: {
+        escapeValue: false, 
+      },
+    });
+
   return (
     <React.StrictMode>
-      <BrowserRouter>
-        <Navbar />
-        <App />
-        <Footer />
-      </BrowserRouter>
+      <div className="app-container">
+        <BrowserRouter>
+          <Navbar />
+          <App />
+          <Footer />
+        </BrowserRouter>
+      </div>
     </React.StrictMode>
   );
 };
