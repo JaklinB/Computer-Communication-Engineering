@@ -56,13 +56,18 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
     setBlogs(originalBlogs);
   };
 
+  const handleSearchKey = (e) => {
+    setSearchKey(e.target.value);
+    handleSearchResults();
+  };
+
   return (
     <div>
       <SearchBar
         value={searchKey}
         clearSearch={handleClearSearch}
         formSubmit={handleSearchBar}
-        handleSearchKey={(e) => setSearchKey(e.target.value)}
+        handleSearchKey={handleSearchKey}
       />
       {!blogs.length ? (
         <EmptyList />
