@@ -8,5 +8,7 @@
     "read_later_page":"See what you have left to read later",
     "delete_profile":"Delete Profile",
     "logout":"Logout",
-    "delete_profile_warning":"Are you sure you want to delete your profile? This action cannot be undone."
+    "delete_profile_warning":"Are you sure you want to delete your profile? This action cannot be undone.",
+    "read_later_articles":"Read Later Articles",
+    "no_read_later":"No articles added to read later."
 }

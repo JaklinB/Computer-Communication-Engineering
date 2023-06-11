@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import firebase from "firebase/compat/app";
+import { useTranslation } from "react-i18next";
 import "firebase/compat/firestore";
 import BlogList from "../../components/BlogList";
 
 const ReadLaterPage = ({ userId }) => {
+  const { t } = useTranslation("profile");
+
   const [readLaterArticles, setReadLaterArticles] = useState([]);
 
   useEffect(() => {
@@ -34,11 +37,11 @@ const ReadLaterPage = ({ userId }) => {
 
   return (
     <div>
-      <h1>Read Later Articles</h1>
+      <h1>{t("read_later_articles")}</h1>
       {readLaterArticles.length > 0 ? (
         <BlogList blogs={readLaterArticles} isLoggedIn={true} />
       ) : (
-        <p>No articles added to read later.</p>
+        <p>{t("no_read_later")}</p>
       )}
     </div>
   );
