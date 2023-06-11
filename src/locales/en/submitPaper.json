@@ -43,5 +43,9 @@
   "contract_num_info": "6380",
 
   "payment_label_info":"To have your paper published, you need to pay publication fee.",
-  "payment_info": "Payment can be made via bank transfer or at the cash office of the Scientific research sector of the Technical University of Sofia."
+  "payment_info": "Payment can be made via bank transfer or at the cash office of the Scientific research sector of the Technical University of Sofia.",
+
+  "submit_paper_form_name_error":"Name is required",
+  "submit_paper_form_email_error":"Email is required",
+  "submit_paper_form_file_error":"File is required"
 }
