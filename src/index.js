@@ -1,15 +1,11 @@
 import React from "react";
 import App from "./App";
-import ReactDOM from "react-dom/client";
+import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import { useTranslation, initReactI18next } from "react-i18next";
 import i18n from "i18next";
-
-const element = document.getElementById("root");
-
-const root = ReactDOM.createRoot(element);
 
 const Magazine = () => {
   const translationFiles = require.context('./locales', true, /\.json$/);
@@ -54,4 +50,9 @@ const Magazine = () => {
   );
 };
 
-root.render(<Magazine />);
+ReactDOM.render(
+  <React.StrictMode>
+    <Magazine />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
