@@ -83,7 +83,7 @@ p a:hover {
 }
 
 #envelope {
-  background: #f66b40;
+  background: #29335c;
   width: 300px;
   height: 200px;
   position: absolute;
@@ -103,12 +103,12 @@ p a:hover {
   height: 0px;
   border-style: solid;
   border-width: 0 150px 150px 150px;
-  border-color: transparent transparent #f66b40 transparent;
+  border-color: transparent transparent #29335c transparent;
 }
 
 #letter {
   position: relative;
-  background: #916b6b;
+  background: #5767aa;
   top: -150px;
   width: 280px;
   height: 200px;
@@ -126,7 +126,7 @@ p a:hover {
   height: 0px;
   border-style: solid;
   border-width: 150px 0 0 250px;
-  border-color: transparent transparent transparent #f66b40;
+  border-color: transparent transparent transparent #29335c;
 }
 
 #right-corner {
@@ -137,7 +137,7 @@ p a:hover {
   height: 0px;
   border-style: solid;
   border-width: 0 0 150px 250px;
-  border-color: transparent transparent #f66b40 transparent;
+  border-color: transparent transparent #29335c transparent;
 }
 
 @keyframes out {
