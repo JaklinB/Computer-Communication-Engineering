@@ -69,11 +69,12 @@
   transform: scale(1.01);
 }
 
-.blogItem-footer {
+.blogItem-footer-info {
   display: grid;
+  text-align: end;
 }
 
-.blogItem-footer p {
+.blogItem-footer-info p {
   font-size: 0.6rem;
   margin: 0;
 }

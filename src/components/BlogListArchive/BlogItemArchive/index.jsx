@@ -6,7 +6,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import "./styles.css";
 
-const BlogItem = ({
+const BlogArchiveCard = ({
   blog: {
     description,
     title,
@@ -75,48 +75,55 @@ const BlogItem = ({
   };
 
   return (
-    <Link
-      className="blogItem-link"
-      to={{
-        pathname: `/articles/${id}`,
-        state: {
-          blog: {
-            description,
-            title,
-            createdAt,
-            authors,
-            cover,
-            category,
-            subCategories,
-            id,
+    <div className="blog-card">
+      <Link
+        className="meta"
+        to={{
+          pathname: `/articles/${id}`,
+          state: {
+            blog: {
+              description,
+              title,
+              createdAt,
+              authors,
+              cover,
+              category,
+              subCategories,
+              id,
+            },
           },
-        },
-      }}
-      onClick={handleArticleClick}
-    >
-      <div className="blogItem-wrap">
-        {imageUrl && (
-          <img className="blogItem-cover" src={imageUrl} alt="cover" />
-        )}
-        <div className="description">
-          <Chip label={category} />
-          <h4>{title}</h4>
-          <p className="blogItem-desc">{description}</p>
-        </div>
-        <footer>
-          <div className="authors">
-            {Array.isArray(authors) && authors.length > 0 ? (
-              <p>{authors.join(", ")}</p>
-            ) : null}
-          </div>
-          <div className="blogItem-footer-info">
+        }}
+        onClick={handleArticleClick}
+      >
+        <div
+          className="photo"
+          style={{ backgroundImage: `url(${imageUrl})` }}
+        ></div>
+      </Link>
+      <div className="description">
+        <h1>{title}</h1>
+        <Chip label={category} />
+        <p className="description-text">{description}</p>
+        <div className="details">
+        {Array.isArray(authors) && authors.length > 0 ? (
+            <p>{authors.join(", ")}</p>
+          ) : null}
+          <div className="footer-details">
+             <div className="blogItem-footer">
             <p>Volume: {volume}</p>
             <p>{formattedDate}</p>
           </div>
-        </footer>
+          <p className="read-more">
+            <Link to={`/articles/${id}`} onClick={handleArticleClick}>
+              Read More
+            </Link>
+          </p>
+          </div>
+         
+        </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
-export default BlogItem;
+export default BlogArchiveCard;

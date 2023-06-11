@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EmptyList from "../../components/common/EmptyList";
-import BlogList from "../../components/BlogList";
+import BlogListArchive from "../../components/BlogListArchive";
 import SearchBar from "../../components/SearchBar";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -64,7 +64,8 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
       {!blogs.length ? (
         <EmptyList />
       ) : (
-        <BlogList blogs={blogs} isLoggedIn={isLoggedIn} />
+        // <BlogList blogs={blogs} isLoggedIn={isLoggedIn} />
+        <BlogListArchive blogs={blogs} isLoggedIn={isLoggedIn} />
       )}
     </div>
   );
