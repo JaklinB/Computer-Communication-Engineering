@@ -209,12 +209,6 @@ const Blog = ({ isAdmin, userId }) => {
         <div className="blog-wrap">
           <header>
             <h1>{blog.title}</h1>
-            <p className="blog-date">{formattedDate}</p>
-            <div className="authors">
-              {Array.isArray(blog.authors) && blog.authors.length > 0 ? (
-                <p className="author">{blog.authors.join(", ")}</p>
-              ) : null}
-            </div>
           </header>
           <div className="user-opinion">
             <div className="like-section">
@@ -239,6 +233,12 @@ const Blog = ({ isAdmin, userId }) => {
           </div>
 
           {imageUrl && <img src={imageUrl} alt="cover" />}
+          <p className="blog-date">{formattedDate}</p>
+          <div className="authors">
+              {Array.isArray(blog.authors) && blog.authors.length > 0 ? (
+                <p className="author">{blog.authors.join(", ")}</p>
+              ) : null}
+            </div>
           <div className="blog-subCategory">
             {Array.isArray(blog.subcategories) &&
               blog.subcategories.map((category, i) => (
