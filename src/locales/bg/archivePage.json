@@ -6,5 +6,7 @@
     "oldest_first":"Най-стари",
     "newest_first":"Най-нови",
     "most_liked":"Най-харесвани",
-    "least_liked":"Най-малко харесвани"
+    "least_liked":"Най-малко харесвани",
+
+    "add_article":"Добави статия"
 }

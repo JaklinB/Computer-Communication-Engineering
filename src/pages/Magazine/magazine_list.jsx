@@ -3,10 +3,14 @@ import EmptyList from "../../components/common/EmptyList";
 import BlogList from "../../components/BlogList";
 import SearchBar from "../../components/SearchBar";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import "./styles.css";
 
 const MagazineList = ({ isAdmin, isLoggedIn }) => {
+  const { t } = useTranslation("archivePage");
+
   const [blogs, setBlogs] = useState([]);
   const [searchKey, setSearchKey] = useState("");
 
@@ -45,7 +49,7 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
     <div>
       {isAdmin && (
         <Link to="/add-article">
-          <button>Add Article</button>
+          <button className="add-article">{t("add_article")}</button>
         </Link>
       )}
       <SearchBar
@@ -54,7 +58,11 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
         formSubmit={handleSearchBar}
         handleSearchKey={(e) => setSearchKey(e.target.value)}
       />
-      {!blogs.length ? <EmptyList /> : <BlogList blogs={blogs} isLoggedIn={isLoggedIn} />}
+      {!blogs.length ? (
+        <EmptyList />
+      ) : (
+        <BlogList blogs={blogs} isLoggedIn={isLoggedIn} />
+      )}
     </div>
   );
 };
