@@ -14,11 +14,6 @@ function SearchBar({ formSubmit, value, handleSearchKey, clearSearch }) {
             value={value}
             onChange={handleSearchKey}
           />
-          {value && (
-            <button className="clear-button" onClick={clearSearch}>
-              X
-            </button>
-          )}
         </div>
         <button><i className="material-icons">search</i></button>
       </form>

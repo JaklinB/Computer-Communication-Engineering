@@ -1,15 +1,13 @@
 .searchBar-wrap {
   width: fit-content;
-  margin: 2.5rem auto 4rem auto;
+  margin: 3%;
   padding: 0.5rem;
   border-radius: 5px;
-  width: 60%;
+  width: 100%;
 }
 
 .searchBar-input-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
 
 .clear-button{

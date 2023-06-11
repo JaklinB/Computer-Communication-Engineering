@@ -12,6 +12,7 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
   const { t } = useTranslation("archivePage");
 
   const [blogs, setBlogs] = useState([]);
+  const [originalBlogs, setOriginalBlogs] = useState([]);
   const [searchKey, setSearchKey] = useState("");
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
         const snapshot = await firestore.collection("articles").get();
         const articles = snapshot.docs.map((doc) => doc.data());
         setBlogs(articles);
+        setOriginalBlogs(articles);
       } catch (error) {
         console.error("Error fetching articles: ", error);
       }
@@ -35,17 +37,23 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
   };
 
   const handleSearchResults = () => {
-    const filteredBlogs = blogs.filter((blog) =>
-      blog.category.toLowerCase().includes(searchKey.toLowerCase().trim()) ||
-      blog.subcategories.some(subcategory =>
-        subcategory.toLowerCase().includes(searchKey.toLowerCase().trim())
-      )
-    );
-    setBlogs(filteredBlogs);
+    if (searchKey.trim() === "") {
+      setBlogs(originalBlogs);
+    } else {
+      const filteredBlogs = originalBlogs.filter(
+        (blog) =>
+          blog.category.toLowerCase().includes(searchKey.toLowerCase().trim()) ||
+          blog.subcategories.some((subcategory) =>
+            subcategory.toLowerCase().includes(searchKey.toLowerCase().trim())
+          )
+      );
+      setBlogs(filteredBlogs);
+    }
   };
 
   const handleClearSearch = () => {
     setSearchKey("");
+    setBlogs(originalBlogs);
   };
 
   return (
@@ -59,10 +67,9 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
       {!blogs.length ? (
         <EmptyList />
       ) : (
-        // <BlogList blogs={blogs} isLoggedIn={isLoggedIn} />
         <BlogListArchive blogs={blogs} isLoggedIn={isLoggedIn} />
       )}
-       {isAdmin && (
+      {isAdmin && (
         <Link to="/add-article">
           <button className="add-article">{t("add_article")}</button>
         </Link>
