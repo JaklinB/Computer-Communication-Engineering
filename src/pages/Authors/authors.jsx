@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { authorsData } from '../../config/authorsData';
-import './styles.css';
+import React, { useState } from "react";
+import { authorsData } from "../../config/authorsData";
+import { useTranslation } from "react-i18next";
+import "./styles.css";
 
 function Authors() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const { t } = useTranslation("authors");
+
+  const [searchTerm, setSearchTerm] = useState("");
   const [showHonoraryEditor, setShowHonoraryEditor] = useState(true);
   const [showEditor, setShowEditor] = useState(true);
   const [showBoard, setShowBoard] = useState(true);
@@ -27,16 +30,20 @@ function Authors() {
 
   return (
     <div>
-      <h1>Authors</h1>
-      <input type="text" placeholder="Search for an author" onChange={handleSearch} />
+      <h1>{t("authors_title")}</h1>
+      <input
+        type="text"
+        placeholder={t("search_hint")}
+        onChange={handleSearch}
+      />
       {showHonoraryEditorTable && (
         <div>
-          <h2>Honorary Editor-in-Chief</h2>
+          <h2>{t("honorary_editor_in_chief")}</h2>
           <table className="authors-table">
             <thead>
               <tr className="authors-table-header">
-                <th>Name</th>
-                <th>Nationality</th>
+                <th>{t("name")}</th>
+                <th>{t("nationality")}</th>
               </tr>
             </thead>
             <tbody>
@@ -52,12 +59,12 @@ function Authors() {
       )}
       {showEditorTable && (
         <div>
-          <h2>Editor-in-Chief</h2>
+          <h2>{t("editor_in_chief")}</h2>
           <table className="authors-table">
             <thead>
               <tr className="authors-table-header">
-                <th>Name</th>
-                <th>Nationality</th>
+                <th>{t("name")}</th>
+                <th>{t("nationality")}</th>
               </tr>
             </thead>
             <tbody>
@@ -73,12 +80,12 @@ function Authors() {
       )}
       {showBoardTable && (
         <div>
-          <h2>Editorial and Scientific Board</h2>
+          <h2>{t("editorial_and_scientific_board")}</h2>
           <table className="authors-table">
             <thead>
               <tr className="authors-table-header">
-                <th>Name</th>
-                <th>Nationality</th>
+                <th>{t("name")}</th>
+                <th>{t("nationality")}</th>
               </tr>
             </thead>
             <tbody>
