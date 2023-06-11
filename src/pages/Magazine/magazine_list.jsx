@@ -50,11 +50,6 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
 
   return (
     <div>
-      {isAdmin && (
-        <Link to="/add-article">
-          <button className="add-article">{t("add_article")}</button>
-        </Link>
-      )}
       <SearchBar
         value={searchKey}
         clearSearch={handleClearSearch}
@@ -66,6 +61,11 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
       ) : (
         // <BlogList blogs={blogs} isLoggedIn={isLoggedIn} />
         <BlogListArchive blogs={blogs} isLoggedIn={isLoggedIn} />
+      )}
+       {isAdmin && (
+        <Link to="/add-article">
+          <button className="add-article">{t("add_article")}</button>
+        </Link>
       )}
     </div>
   );
