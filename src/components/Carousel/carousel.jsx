@@ -3,10 +3,9 @@ import "./styles.css";
 
 import image1 from "./images/1.jpg";
 import image2 from "./images/2.jpg";
-import image3 from "./images/3.jpg";
 
 
-const images = [image1, image2, image3];
+const images = [image1, image2];
 
 const Carousel = ({ slideInterval = 3000 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
