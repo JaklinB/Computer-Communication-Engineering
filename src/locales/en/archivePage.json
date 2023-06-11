@@ -4,6 +4,8 @@
 
     "sort_by":"Sort By:",
     "oldest_first":"Oldest First",
-    "newest_first":"Newest First"
+    "newest_first":"Newest First",
+    "most_liked":"Most liked",
+    "least_liked":"Least liked"
 
 }

@@ -4,5 +4,7 @@
 
     "sort_by":"Сортирай по:",
     "oldest_first":"Най-стари",
-    "newest_first":"Най-нови"
+    "newest_first":"Най-нови",
+    "most_liked":"Най-харесвани",
+    "least_liked":"Най-малко харесвани"
 }
