@@ -18,6 +18,9 @@
     "add_authors_empty":"Please enter author names",
     "add_volume_empty":"Please enter volume",
     "add_image_empty":"Please import an image",
+
+    "hint_subcategories":"Press enter to add subcategory",
+    "hint_authors":"Press enter to add author",
     
     "submit":"Submit"
 }

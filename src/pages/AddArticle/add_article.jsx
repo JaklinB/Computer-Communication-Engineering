@@ -258,6 +258,7 @@ const AddArticle = ({ userId }) => {
           }`}
         >
           <label htmlFor="subcategories">{t("add_subcategories")}</label>
+          <p>{t("hint_subcategories")}</p>
           <div className="tags-input">
             {subcategories.map((subcategory, index) => (
               <div className="tag" key={index}>
@@ -307,6 +308,7 @@ const AddArticle = ({ userId }) => {
           }`}
         >
           <label htmlFor="authors">{t("add_authors")}</label>
+          <p>{t("hint_authors")}</p>
           <div className="tags-input">
             {authors.map((author, index) => (
               <div className="tag" key={index}>
