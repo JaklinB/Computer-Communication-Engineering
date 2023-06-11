@@ -8,23 +8,37 @@
 
 .home-header h2 {
   color: #0080ff;
-  font-size: 2rem;
+   font-size: calc(2rem + 1vw);
+}
+
+.title-home{
+  display: flex;
+  justify-content: center;
 }
 
 .home-header h1 {
-  font-size: 3rem;
+  font-size: calc(1.5rem + 1.5vw);
   color: #0f52ba;
-  margin-bottom: 1rem;
+  margin-bottom: 2%;
+  width: 90%;
+  text-align: center;
 }
 
 .home-header h1 span {
   color: #b0c4de;
+  width: 50%;
 }
 
 .home-header p {
   color: #a9a9a9;
   font-weight: 500;
   text-align: center;
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1rem; 
+  }
 }
 
 
