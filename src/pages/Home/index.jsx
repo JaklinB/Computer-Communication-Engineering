@@ -4,10 +4,14 @@ import EmptyList from "../../components/common/EmptyList";
 import BlogItem from "../../components/BlogList/BlogItem";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import { useTranslation } from 'react-i18next';
 import "./styles.css";
 
 const Home = ({ isLoggedIn }) => {
+  const { t } = useTranslation('homePage');
+
   const [blogs, setBlogs] = useState([]);
+  const [mostLikedBlogs, setMostLikedBlogs] = useState([]);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -26,24 +30,35 @@ const Home = ({ isLoggedIn }) => {
 
   const newestBlogs = blogs.slice(0, 3);
 
+  useEffect(() => {
+    const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes);
+    const mostLiked = sortedBlogs.slice(0, 3);
+    setMostLikedBlogs(mostLiked);
+  }, [blogs]);
+
   return (
     <div>
       <Header />
-      <h1 className="blogList-title">Най-новите статии</h1>
+      <h1 className="blogList-title">{t('newest_articles')}:</h1>
       <div className="blogList-wrap">
-          {!blogs.length ? (
-        <EmptyList />
-      ) : (
-        newestBlogs.map((blog) => (
-          <BlogItem
-            key={blog.id}
-            blog={blog}
-            isLoggedIn={isLoggedIn} 
-          />
-        ))
-      )}
+        {!blogs.length ? (
+          <EmptyList />
+        ) : (
+          newestBlogs.map((blog) => (
+            <BlogItem key={blog.id} blog={blog} isLoggedIn={isLoggedIn} />
+          ))
+        )}
       </div>
-    
+      <h1 className="blogList-title">{t('most_liked_articles')}:</h1>
+      <div className="blogList-wrap">
+        {!blogs.length ? (
+          <EmptyList />
+        ) : (
+          mostLikedBlogs.map((blog) => (
+            <BlogItem key={blog.id} blog={blog} isLoggedIn={isLoggedIn} />
+          ))
+        )}
+      </div>
     </div>
   );
 };

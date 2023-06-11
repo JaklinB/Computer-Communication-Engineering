@@ -1,5 +1,8 @@
 {
     "title_light":"COMPUTER & COMMUNICATIONS",
     "title_dark":"ENGINEERING",
-    "tu_sofia": "Technical University of Sofia"
+    "tu_sofia": "Technical University of Sofia",
+
+    "newest_articles":"Latest articles",
+    "most_liked_articles":"Most liked articles"
 }
