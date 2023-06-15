@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import firebase from "firebase/compat/app";
 import { useTranslation } from "react-i18next";
+import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import BlogList from "../../components/BlogList";
 
@@ -17,13 +17,28 @@ const ReadLaterPage = ({ userId }) => {
         if (userDoc.exists) {
           const userData = userDoc.data();
           const readLaterArticleIds = userData.readLater || [];
-          const readLaterPromises = readLaterArticleIds.map((articleId) => {
+          const readLaterPromises = readLaterArticleIds.map(async (articleId) => {
             const articleRef = firebase.firestore().collection("articles").doc(articleId);
-            return articleRef.get();
+            const articleSnapshot = await articleRef.get();
+            const articleData = articleSnapshot.data();
+
+            if (articleData && articleData.title && articleData.createdAt && articleData.authors) {
+              return {
+                description: articleData.description || "",
+                title: articleData.title,
+                createdAt: articleData.createdAt.toDate(),
+                authors: articleData.authors,
+                cover: articleData.cover || "",
+                category: articleData.category || "",
+                subCategories: articleData.subCategories || [],
+                id: articleId,
+              };
+            }
           });
-          const readLaterArticleDocs = await Promise.all(readLaterPromises);
-          const readLaterArticlesData = readLaterArticleDocs.map((doc) => doc.data());
-          setReadLaterArticles(readLaterArticlesData);
+
+          const readLaterArticleData = await Promise.all(readLaterPromises);
+          const validArticles = readLaterArticleData.filter((article) => article);
+          setReadLaterArticles(validArticles);
         }
       } catch (error) {
         console.error("Error fetching read later articles:", error);
