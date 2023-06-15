@@ -47,7 +47,7 @@ const BlogList = ({ blogs, isLoggedIn }) => {
           <option value="least-liked">{t("least_liked")}</option>
         </select>
       </div>
-      <div className="blogList-wrap">
+      <div className="blogList-wrapped">
         {sortBlogs(blogs).map((blog) => (
           <BlogItem blog={blog} key={blog.id} isLoggedIn={isLoggedIn} />
         ))}
