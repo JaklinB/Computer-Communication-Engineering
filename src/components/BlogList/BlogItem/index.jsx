@@ -94,7 +94,7 @@ const BlogItem = ({
       }}
       onClick={handleArticleClick}
     >
-      <div className="blogItem-wrap">
+      <div className="blogItem-wrapped">
         {imageUrl && (
           <img className="blogItem-cover" src={imageUrl} alt="cover" />
         )}
