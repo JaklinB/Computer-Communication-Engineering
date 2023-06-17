@@ -2,34 +2,22 @@ import React, { useState, useEffect } from "react";
 import EmptyList from "../../components/common/EmptyList";
 import BlogListArchive from "../../components/BlogListArchive";
 import SearchBar from "../../components/SearchBar";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "./styles.css";
+import { useLocation } from "react-router-dom";
+import './styles.css';
 
 const MagazineList = ({ isAdmin, isLoggedIn }) => {
   const { t } = useTranslation("archivePage");
+  const location = useLocation();
+  const blogs = location.state?.blogs || [];
 
-  const [blogs, setBlogs] = useState([]);
   const [originalBlogs, setOriginalBlogs] = useState([]);
   const [searchKey, setSearchKey] = useState("");
 
   useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const firestore = firebase.firestore();
-        const snapshot = await firestore.collection("articles").get();
-        const articles = snapshot.docs.map((doc) => doc.data());
-        setBlogs(articles);
-        setOriginalBlogs(articles);
-      } catch (error) {
-        console.error("Error fetching articles: ", error);
-      }
-    };
-
-    fetchArticles();
-  }, []);
+    setOriginalBlogs(blogs);
+  }, [blogs]);
 
   const handleSearchBar = (e) => {
     e.preventDefault();
@@ -38,28 +26,30 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
 
   const handleSearchResults = () => {
     if (searchKey.trim() === "") {
-      setBlogs(originalBlogs);
+      setOriginalBlogs(blogs);
     } else {
-      const filteredBlogs = originalBlogs.filter(
+      const filteredBlogs = blogs.filter(
         (blog) =>
           blog.category.toLowerCase().includes(searchKey.toLowerCase().trim()) ||
           blog.subcategories.some((subcategory) =>
             subcategory.toLowerCase().includes(searchKey.toLowerCase().trim())
           )
       );
-      setBlogs(filteredBlogs);
+      setOriginalBlogs(filteredBlogs);
     }
   };
 
   const handleClearSearch = () => {
     setSearchKey("");
-    setBlogs(originalBlogs);
+    setOriginalBlogs(blogs);
   };
 
   const handleSearchKey = (e) => {
     setSearchKey(e.target.value);
     handleSearchResults();
   };
+
+  console.log(originalBlogs);
 
   return (
     <div>
@@ -69,10 +59,10 @@ const MagazineList = ({ isAdmin, isLoggedIn }) => {
         formSubmit={handleSearchBar}
         handleSearchKey={handleSearchKey}
       />
-      {!blogs.length ? (
+      {!originalBlogs.length ? (
         <EmptyList />
       ) : (
-        <BlogListArchive blogs={blogs} isLoggedIn={isLoggedIn} />
+        <BlogListArchive blogs={originalBlogs} isLoggedIn={isLoggedIn} />
       )}
       {isAdmin && (
         <Link to="/add-article">

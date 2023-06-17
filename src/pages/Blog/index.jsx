@@ -136,7 +136,7 @@ const Blog = ({ isAdmin, userId }) => {
       if (userId) {
         const blogRef = firebase.firestore().collection("articles").doc(id);
         await blogRef.delete();
-        navigate("/list");
+        navigate("/archive");
       }
     } catch (error) {
       console.error("Error deleting article:", error);

@@ -14,6 +14,7 @@ import PublicationFees from "./pages/PublicationFees/publication_fees";
 import AddArticle from "./pages/AddArticle/add_article";
 import ProfilePage from "./pages/Profile/profile";
 import ReadLaterPage from "./pages/ReadLater/read_later";
+import VolumePage from "./pages/Archive";
 import "./App.css";
 import "firebase/auth";
 import "firebase/firestore";
@@ -79,6 +80,7 @@ const App = () => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/read-later" element={<ReadLaterPage userId={user ? user.uid : null} />} />
         <Route path="/add-article" element={<AddArticle userId={user ? user.uid : null} />} />
+        <Route path="/archive" element={<VolumePage isAdmin={isAdmin} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>

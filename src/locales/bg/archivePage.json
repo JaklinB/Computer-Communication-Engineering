@@ -8,5 +8,7 @@
     "most_liked":"Най-харесвани",
     "least_liked":"Най-малко харесвани",
 
-    "add_article":"Добави статия"
+    "add_article":"Добави статия",
+
+    "select_volume":"Избери брой"
 }
